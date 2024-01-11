@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
 # Depend on system install of Gazebo
 find_package(gazebo REQUIRED)
 
-link_directories(${GAZEBO_LIBRARY_DIRS})
+link_directories(${GAZEBO_LIBRARY_DIRS} /usr/local/lib)
 include_directories(${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS} /usr/local/include/wpimath /usr/local/include/ntcore /usr/local/include/wpiutil)
 
 catkin_package(
@@ -22,5 +22,5 @@ catkin_package(
         gazebo_ros
 )
 
-add_library(nt_motor_plugin src/nt_motor.cpp)
+add_library(nt_motor_plugin SHARED src/nt_motor.cpp)
 target_link_libraries(nt_motor_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} wpiutil wpimath ntcore)

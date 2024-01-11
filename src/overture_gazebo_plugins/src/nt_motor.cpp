@@ -1,7 +1,6 @@
 //
 // Created by ajahueym on 1/10/24.
 //
-
 #include <frc/system/plant/DCMotor.h>
 #include <ntcore/networktables/NetworkTableInstance.h>
 #include <ros/ros.h>
@@ -14,10 +13,11 @@ namespace gazebo {
     class NTMotorPlugin : public ModelPlugin {
     public:
         NTMotorPlugin(): ModelPlugin() {
-
         }
 
         void Load(physics::ModelPtr model, sdf::ElementPtr sdf) override {
+            ROS_INFO("Loading NTMotorPlugin...");
+
             this->model = model;
 
             if(!ros::isInitialized()){
@@ -88,15 +88,25 @@ namespace gazebo {
 
             motor = motor.WithReduction(gear_ratio);
 
-            /// We have the joint that is to be controlled, setup nt listeners and an update
+            /// We have the joint that is to be controlled, setup nt listeners and update
             updateConnection = event::Events::ConnectWorldUpdateEnd([this] { Update(); });
 
             ntInst = nt::NetworkTableInstance::GetDefault();
+            ntInst.SetServer("127.0.0.1");
+            std::stringstream  ntIdentity;
+            ntIdentity << "nt_motor_plugin_" << modelName << "_" << jointName;
+            ntInst.StartClient4(ntIdentity.str());
+
             const auto ntable = ntInst.GetTable(modelName)->GetSubTable(jointName);
             encoderSpeedEntry = ntable->GetEntry("encoder_speed");
             encoderPositionEntry = ntable->GetEntry("encoder_position");
             voltageEntry = ntable->GetEntry("voltage_applied");
             currentEntry = ntable->GetEntry("current");
+
+            encoderSpeedEntry.SetDouble(0);
+            encoderPositionEntry.SetDouble(0);
+            voltageEntry.SetDouble(0);
+            currentEntry.SetDouble(0);
         }
 
         void Update() {
@@ -108,14 +118,14 @@ namespace gazebo {
             currentEntry.SetDouble(current.to<double>());
 
             const auto torqueGenerated = motor.Torque(current);
-            controlledJoint->SetForce(jointAxis, torqueGenerated.to<double>());
-
+            ignition::math::Vector3d torque {0, 0, torqueGenerated.value()};
+            controlledJoint->GetChild()->SetTorque(torque);
 
             double position = controlledJoint->Position(jointAxis);
             int encoderPosition = std::floor(position / (2.0 * M_PI) * codesPerRev);
             encoderPositionEntry.SetDouble(encoderPosition);
 
-            /// Delay by the same amount as the motors do
+            ///TODO: Delay by the same amount as the motors do
             double encoderSpeed = jointSpeedRadPerS  / (2.0 * M_PI) * codesPerRev;
             encoderSpeedEntry.SetDouble(encoderSpeed);
         }
