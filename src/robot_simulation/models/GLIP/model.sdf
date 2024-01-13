@@ -318,7 +318,7 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
           <damping>0</damping>
-          <friction>1.5</friction>
+          <friction>1.0</friction>
         </dynamics>
       </axis>
       <physics>

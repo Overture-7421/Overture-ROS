@@ -9,6 +9,18 @@
 #include <gazebo/common/common.hh>
 #include <cmath>
 
+#include <boost/accumulators/accumulators.hpp>
+#include <boost/accumulators/statistics.hpp>
+#include <boost/accumulators/statistics/rolling_mean.hpp>
+
+namespace ba = boost::accumulators;
+
+auto make_accum(int window) {
+    return ba::accumulator_set<
+            double,
+            ba::stats<ba::tag::rolling_mean>> (ba::tag::rolling_window::window_size = window);
+}
+
 namespace gazebo {
     class NTMotorPlugin : public ModelPlugin {
     public:
@@ -75,15 +87,12 @@ namespace gazebo {
 
             if(motorModel == "Kraken") {
                 motor = frc::DCMotor::KrakenX60();
-                codesPerRev = 2048;
             } else if (motorModel == "NEO") {
                 motor = frc::DCMotor::NEO();
             } else if (motorModel == "Falcon"){
                 motor = frc::DCMotor::Falcon500();
-                codesPerRev = 2048;
             } else if (motorModel == "FalconFOC"){
                 motor = frc::DCMotor::Falcon500FOC();
-                codesPerRev = 2048;
             } else if (motorModel == "Vortex"){
                 motor = frc::DCMotor::NeoVortex();
             } else {
@@ -144,12 +153,13 @@ namespace gazebo {
             controlledJoint->GetChild()->SetTorque(torque);
 
             double position = controlledJoint->Position(jointAxis);
-            int encoderPosition = std::floor(position / (2.0 * M_PI) * codesPerRev) * gear_ratio;
-            encoderPositionEntry.SetDouble(encoderPosition);
+            double rotations = position / (2.0 * M_PI) * gear_ratio;
+            encoderPositionEntry.SetDouble(rotations);
 
             ///TODO: Delay by the same amount as the motors do
-            double encoderSpeed = jointSpeedRadPerS  / (2.0 * M_PI) * codesPerRev * gear_ratio;
-            encoderSpeedEntry.SetDouble(encoderSpeed);
+            double encoderSpeed = jointSpeedRadPerS  / (2.0 * M_PI) * gear_ratio;
+            acc(encoderSpeed);
+            encoderSpeedEntry.SetDouble(ba::rolling_mean(acc));
             ntInst.Flush();
         }
 
@@ -162,9 +172,10 @@ namespace gazebo {
         event::ConnectionPtr updateConnection;
         nt::NetworkTableInstance ntInst;
         nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry, voltageEntry, currentEntry;
-        unsigned int codesPerRev = 0;
         double gear_ratio = 1;
         char torqueAxis = 'z';
+
+        ba::accumulator_set<double, ba::stats<ba::tag::rolling_mean>> acc = make_accum(100);
 
     };
 
