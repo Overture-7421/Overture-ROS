@@ -16,8 +16,6 @@ namespace gazebo {
         }
 
         void Load(physics::ModelPtr model, sdf::ElementPtr sdf) override {
-            ROS_INFO("Loading NTMotorPlugin...");
-
             this->model = model;
 
             if(!ros::isInitialized()){
@@ -63,9 +61,16 @@ namespace gazebo {
                 return;
             }
 
-            double gear_ratio = 1;
             if (sdf->HasElement("gear_ratio")) {
                 gear_ratio = sdf->Get<double >("gear_ratio");
+            }
+
+            if (sdf->HasElement("motor_count")) {
+                motorCount = sdf->Get<unsigned int >("motor_count");
+            }
+
+            if (sdf->HasElement("torque_axis")) {
+                torqueAxis = sdf->Get<char>("torque_axis");
             }
 
             if(motorModel == "Kraken") {
@@ -118,27 +123,48 @@ namespace gazebo {
             currentEntry.SetDouble(current.to<double>());
 
             const auto torqueGenerated = motor.Torque(current);
-            ignition::math::Vector3d torque {0, 0, torqueGenerated.value()};
+            const double torqueToApply = torqueGenerated.value() * motorCount;
+            ignition::math::Vector3d torque;
+
+            switch (torqueAxis) {
+                case 'z':
+                    torque =  {0, 0, torqueToApply};
+                    break;
+                case 'x':
+                    torque =  {torqueToApply, 0, 0};
+                    break;
+                case 'y':
+                    torque =  {0, torqueToApply, 0};
+                    break;
+                default:
+                    break;
+
+            }
+
             controlledJoint->GetChild()->SetTorque(torque);
 
             double position = controlledJoint->Position(jointAxis);
-            int encoderPosition = std::floor(position / (2.0 * M_PI) * codesPerRev);
+            int encoderPosition = std::floor(position / (2.0 * M_PI) * codesPerRev) * gear_ratio;
             encoderPositionEntry.SetDouble(encoderPosition);
 
             ///TODO: Delay by the same amount as the motors do
-            double encoderSpeed = jointSpeedRadPerS  / (2.0 * M_PI) * codesPerRev;
+            double encoderSpeed = jointSpeedRadPerS  / (2.0 * M_PI) * codesPerRev * gear_ratio;
             encoderSpeedEntry.SetDouble(encoderSpeed);
+            ntInst.Flush();
         }
 
     private:
         frc::DCMotor motor = frc::DCMotor(0_V, 0_Nm, 0_A, 0_A, 0_rad_per_s);
         physics::JointPtr controlledJoint;
         unsigned int jointAxis = 0;
+        unsigned int motorCount = 1;
         physics::ModelPtr model;
         event::ConnectionPtr updateConnection;
         nt::NetworkTableInstance ntInst;
         nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry, voltageEntry, currentEntry;
         unsigned int codesPerRev = 0;
+        double gear_ratio = 1;
+        char torqueAxis = 'z';
 
     };
 

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 4.0.2 commit date:2023-12-05, commit time:07:41, hash:9be62e85b727</authoring_tool>
+    </contributor>
+    <created>2024-01-12T17:48:19</created>
+    <modified>2024-01-12T17:48:19</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="ID38-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0.913725 0.721569 0.490196 1</color>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images/>
+  <library_materials>
+    <material id="ID38-material" name="ID38">
+      <instance_effect url="#ID38-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="ID51-mesh" name="ID51">
+      <mesh>
+        <source id="ID51-mesh-positions">
+          <float_array id="ID51-mesh-positions-array" count="84">0.01269996 0.06984996 0.02539998 0.01269996 -0.06984996 0.02539998 0.01269996 -0.06984996 -0.02539998 0.01269996 0.06984996 -0.02539998 -0.01269996 0.06984996 -0.02539998 0.5461001 0.09525001 -0.02539938 -0.0126999 0.09524995 0.02540057 -0.0126999 0.09524995 -0.02539938 -0.0126999 0.06984996 0.02540057 0.5461001 0.06984996 -0.02539938 0.5461001 0.09525001 0.02540057 0.5461001 0.06984996 0.02540057 0.2667 -0.06984996 0.0254001 0.2667 -0.06984996 -0.02539986 0.2921 0.06985002 0.0254001 0.2667 0.06985002 0.0254001 0.2921 -0.06984996 0.0254001 0.2921 -0.06984996 -0.02539986 0.2667 0.06985002 -0.02539986 0.2921 0.06985002 -0.02539986 -0.0126999 -0.06985002 0.02540057 0.5461001 -0.09524995 0.02540057 0.5461001 -0.09524995 -0.02539938 0.5461001 -0.06984996 -0.02539938 -0.0126999 -0.09525001 -0.02539938 0.5461001 -0.06984996 0.02540057 -0.0126999 -0.09525001 0.02540057 -0.0126999 -0.06985002 -0.02539938</float_array>
+          <technique_common>
+            <accessor source="#ID51-mesh-positions-array" count="28" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="ID51-mesh-normals">
+          <float_array id="ID51-mesh-normals-array" count="96">1 0 0 -1 -2.62464e-7 0 1.07034e-6 2.37598e-5 -1 -1 0 0 2.34906e-5 0 1 -2.33678e-5 -4.23997e-6 -1 0 0 1 -1 -7.05364e-7 1.92495e-6 -1.17331e-6 1 6.00155e-7 1.46666e-6 -1 0 0 0 1 0 1 0 1 0 0 0 0 -1 0 -1 0 0 -1 0 0 1 0 -1 3.81878e-6 1.92496e-6 0 0 1 0 -1 0 0 0 -1 0 1 0 -1 0 0 2.37861e-5 0 1 0 0 -1 -1 0 0 1.46666e-6 -1 0 0 0 1 1 5.24928e-7 0 0 -1 -7.87383e-7 0 0 1 0 0 -1</float_array>
+          <technique_common>
+            <accessor source="#ID51-mesh-normals-array" count="32" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="ID51-mesh-vertices">
+          <input semantic="POSITION" source="#ID51-mesh-positions"/>
+        </vertices>
+        <triangles material="ID38-material" count="48">
+          <input semantic="VERTEX" source="#ID51-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#ID51-mesh-normals" offset="1"/>
+          <p>5 0 11 0 9 0 13 1 15 1 18 1 7 2 9 2 4 2 20 3 24 3 26 3 1 4 8 4 20 4 4 5 2 5 27 5 14 6 12 6 16 6 27 7 8 7 4 7 0 8 4 8 8 8 27 9 1 9 20 9 25 10 26 10 21 10 10 11 7 11 6 11 14 12 17 12 19 12 19 13 13 13 18 13 3 0 1 0 2 0 12 14 17 14 16 14 8 15 9 15 11 15 19 16 15 16 14 16 8 17 7 17 4 17 11 18 6 18 8 18 21 19 24 19 22 19 24 20 23 20 22 20 27 21 25 21 23 21 22 0 25 0 21 0 5 0 10 0 11 0 13 22 12 22 15 22 7 20 5 20 9 20 20 3 27 3 24 3 1 23 0 23 8 23 4 24 3 24 2 24 14 6 15 6 12 6 27 25 20 25 8 25 0 16 3 16 4 16 27 26 2 26 1 26 25 27 20 27 26 27 10 11 5 11 7 11 14 28 16 28 17 28 19 13 17 13 13 13 3 0 0 0 1 0 12 14 13 14 17 14 8 29 4 29 9 29 19 16 18 16 15 16 8 3 6 3 7 3 11 30 10 30 6 30 21 19 26 19 24 19 24 31 27 31 23 31 27 21 20 21 25 21 22 0 23 0 25 0</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Generic_Structure_Piece_034" name="Generic Structure Piece.034" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#ID51-mesh" name="Generic Structure Piece.034">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="ID38-material" target="#ID38-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
