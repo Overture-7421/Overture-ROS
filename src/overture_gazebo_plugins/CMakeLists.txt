@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(overture_gazebo_plugins)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++20)
+add_compile_options(-std=c++20 -O3)
 
 # Load catkin and all dependencies required for this package
 find_package(catkin REQUIRED COMPONENTS
@@ -28,3 +28,9 @@ target_link_libraries(nt_motor_plugin ${catkin_LIBRARIES} wpiutil wpimath ntcore
 
 add_library(nt_world_telemetry_plugin SHARED src/world_telemetry/world_telemetry.cpp)
 target_link_libraries(nt_world_telemetry_plugin ${catkin_LIBRARIES} ntcore)
+
+add_library(nt_imu_plugin SHARED src/nt_imu/nt_imu.cpp)
+target_link_libraries(nt_imu_plugin ${catkin_LIBRARIES} ntcore)
+
+add_library(nt_cancoder_plugin SHARED src/nt_cancoder/nt_cancoder.cpp)
+target_link_libraries(nt_cancoder_plugin ${catkin_LIBRARIES} ntcore)

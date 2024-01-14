@@ -9,18 +9,6 @@
 #include <gazebo/common/common.hh>
 #include <cmath>
 
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
-#include <boost/accumulators/statistics/rolling_mean.hpp>
-
-namespace ba = boost::accumulators;
-
-auto make_accum(int window) {
-    return ba::accumulator_set<
-            double,
-            ba::stats<ba::tag::rolling_mean>> (ba::tag::rolling_window::window_size = window);
-}
-
 namespace gazebo {
     class NTMotorPlugin : public ModelPlugin {
     public:
@@ -156,9 +144,11 @@ namespace gazebo {
             double rotations = position / (2.0 * M_PI) * gear_ratio;
             encoderPositionEntry.SetDouble(rotations);
 
-            double encoderSpeed = jointSpeedRadPerS  / (2.0 * M_PI) * gear_ratio;
-            acc(encoderSpeed);
-            encoderSpeedEntry.SetDouble(ba::rolling_mean(acc));
+            double newEncoderSpeed = jointSpeedRadPerS  / (2.0 * M_PI) * gear_ratio;
+            double encoderSpeed = beta * lastSpeed + (1 - beta)*newEncoderSpeed;
+            lastSpeed = encoderSpeed;
+
+            encoderSpeedEntry.SetDouble(encoderSpeed);
             ntInst.Flush();
         }
 
@@ -171,11 +161,12 @@ namespace gazebo {
         event::ConnectionPtr updateConnection;
         nt::NetworkTableInstance ntInst;
         nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry, voltageEntry, currentEntry;
+
+        double lastSpeed = 0;
+        const double beta = std::exp(-1 * 25 * 0.001);
+
         double gear_ratio = 1;
         char torqueAxis = 'z';
-
-        ba::accumulator_set<double, ba::stats<ba::tag::rolling_mean>> acc = make_accum(100);
-
     };
 
 

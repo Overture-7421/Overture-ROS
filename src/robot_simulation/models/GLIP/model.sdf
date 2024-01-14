@@ -100,6 +100,19 @@
           </contact>
         </surface>
       </collision>
+
+      <sensor name="imu_sensor" type="imu">
+          <always_on>true</always_on>
+          <update_rate>100</update_rate>
+          <visualize>true</visualize>
+          <topic>imu_sensor</topic>
+          <pose>0 0 0 0 0 0</pose>
+
+          <plugin name='nt_imu_plugin' filename="libnt_imu_plugin.so">
+            <robot_name>GLIP</robot_name>
+          </plugin>
+      </sensor>
+
     </link>
     <link name='arm'>
       <inertial>
@@ -309,8 +322,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1.79769e+308</lower>
-          <upper>1.79769e+308</upper>
+          <lower>-1.5708</lower>
+          <upper>0.25</upper>
           <effort>-1</effort>
           <velocity>-1</velocity>
         </limit>
@@ -334,6 +347,7 @@
         </ode>
       </physics>
     </joint>
+
     <joint name='arm_to_shooter_intake_joint' type='revolute'>
       <parent>arm</parent>
       <child>shooter_intake</child>
@@ -341,8 +355,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1.79769e+308</lower>
-          <upper>1.79769e+308</upper>
+          <lower>-1.5708</lower>
+          <upper>1.5708</upper>
           <effort>-1</effort>
           <velocity>-1</velocity>
         </limit>
@@ -377,7 +391,6 @@
         <motor_count>2</motor_count>
         <gear_ratio>150</gear_ratio>
     </plugin>
-
 
     <plugin name='NTMotor_Arm_ShooterIntake' filename='libnt_motor_plugin.so'>
         <joint_name>arm_to_shooter_intake_joint</joint_name>
