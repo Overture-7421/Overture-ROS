@@ -156,7 +156,6 @@ namespace gazebo {
             double rotations = position / (2.0 * M_PI) * gear_ratio;
             encoderPositionEntry.SetDouble(rotations);
 
-            ///TODO: Delay by the same amount as the motors do
             double encoderSpeed = jointSpeedRadPerS  / (2.0 * M_PI) * gear_ratio;
             acc(encoderSpeed);
             encoderSpeedEntry.SetDouble(ba::rolling_mean(acc));

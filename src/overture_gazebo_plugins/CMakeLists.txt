@@ -23,8 +23,8 @@ catkin_package(
 )
 
 add_library(nt_motor_plugin SHARED src/nt_motor/nt_motor.cpp)
-target_link_libraries(nt_motor_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} wpiutil wpimath ntcore)
+target_link_libraries(nt_motor_plugin ${catkin_LIBRARIES} wpiutil wpimath ntcore)
 
 
 add_library(nt_world_telemetry_plugin SHARED src/world_telemetry/world_telemetry.cpp)
-target_link_libraries(nt_world_telemetry_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ntcore)
+target_link_libraries(nt_world_telemetry_plugin ${catkin_LIBRARIES} ntcore)
