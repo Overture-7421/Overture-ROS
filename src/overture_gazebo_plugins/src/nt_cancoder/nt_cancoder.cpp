@@ -8,6 +8,8 @@
 #include <networktables/NetworkTableEntry.h>
 #include <overture_filters/low_pass_filter/low_pass_filter.h>
 
+#define  SIM_UPDATE_PERIOD 0.001
+
 namespace gazebo {
     class NTCANCoder : public ModelPlugin {
     public:
@@ -15,6 +17,8 @@ namespace gazebo {
         }
 
         void Load(physics::ModelPtr model, sdf::ElementPtr sdf) override {
+            this->model = model;
+
             std::string jointName;
             if (!sdf->HasElement("joint_name")) {
                 throw std::invalid_argument("NTCANCoder plugin not given a joint name!");
@@ -50,19 +54,34 @@ namespace gazebo {
         }
 
         void Update() {
-            encoderPositionEntry.SetDouble(sourceJoint->Position() / ( 2 * M_PI));
+            const auto currentSimTime = model->GetWorld()->SimTime();
 
-            double encoderSpeed = speedLPF.Update(sourceJoint->GetVelocity(0)) / (2.0 * M_PI);
+            if(currentSimTime.Double() - lastUpdateSimTime.Double() < SIM_UPDATE_PERIOD){
+                return;
+            }
+            lastUpdateSimTime = currentSimTime;
+
+
+            double sensorPosition = sourceJoint->Position() / ( 2 * M_PI);
+            encoderPositionEntry.SetDouble(sensorPosition);
+
+
+            double encoderSpeed = speedLPF.Update((sensorPosition - lastPos) / SIM_UPDATE_PERIOD);
+            lastPos = sensorPosition;
+
             encoderSpeedEntry.SetDouble(encoderSpeed);
         }
 
     private:
+        physics::ModelPtr model;
         event::ConnectionPtr updateConnection;
         physics::JointPtr sourceJoint;
         nt::NetworkTableInstance ntInst;
         nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry;
 
-        LowPassFilter speedLPF {25,  1.0 / 1000.0};
+        common::Time lastUpdateSimTime;
+        LowPassFilter speedLPF {25,  SIM_UPDATE_PERIOD};
+        double lastPos = 0;
     };
 
     GZ_REGISTER_MODEL_PLUGIN(NTCANCoder);

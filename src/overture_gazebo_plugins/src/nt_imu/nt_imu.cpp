@@ -22,14 +22,7 @@ namespace gazebo {
                 throw std::invalid_argument("NTIMUPlugin is meant for sensors of type \"imu\"!!!");
             }
 
-            std::string robotName;
-            if(!_sdf->HasElement("robot_name")){
-                throw std::invalid_argument("NTIMUPlugin needs the robot's name!!!");
-            }
-
-
             imuSensor = dynamic_cast<sensors::ImuSensor*>(_sensor.get());
-
             updateConnection = imuSensor->ConnectUpdated([this] { Update(); });
 
             ntInst = nt::NetworkTableInstance::GetDefault();
@@ -39,10 +32,12 @@ namespace gazebo {
             ntInst.StartClient4(ntIdentity.str());
 
             std::string imuScopedName = imuSensor->ScopedName();
-            std::string const result = std::regex_replace( imuScopedName, std::regex( "\\::" ), "[/]\n" );
+            imuScopedName = std::regex_replace( imuScopedName, std::regex( "\\::" ), "/" );
 
+            const int worldNameLength = imuSensor->WorldName().length() + 1;
+            imuScopedName = imuScopedName.substr(worldNameLength);
 
-            const auto ntable = ntInst.GetTable(result);
+            const auto ntable = ntInst.GetTable(imuScopedName);
             rollEntry = ntable->GetEntry("roll");
             pitchEntry = ntable->GetEntry("pitch");
             yawEntry = ntable->GetEntry("yaw");

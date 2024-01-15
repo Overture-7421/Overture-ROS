@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(overture_gazebo_plugins)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++20 -O3)
+add_compile_options(-std=c++20)
 
 # Load catkin and all dependencies required for this package
 find_package(catkin REQUIRED COMPONENTS
