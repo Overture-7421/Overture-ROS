@@ -27,7 +27,6 @@ namespace gazebo {
                 throw std::invalid_argument("NTIMUPlugin needs the robot's name!!!");
             }
 
-            robotName = _sdf->Get<std::string>("robot_name");
 
             imuSensor = dynamic_cast<sensors::ImuSensor*>(_sensor.get());
 
@@ -39,7 +38,11 @@ namespace gazebo {
             ntIdentity << "nt_imu_plugin_" << imuSensor->Name();
             ntInst.StartClient4(ntIdentity.str());
 
-            const auto ntable = ntInst.GetTable(robotName)->GetSubTable(imuSensor->Name());
+            std::string imuScopedName = imuSensor->ScopedName();
+            std::string const result = std::regex_replace( imuScopedName, std::regex( "\\::" ), "[/]\n" );
+
+
+            const auto ntable = ntInst.GetTable(result);
             rollEntry = ntable->GetEntry("roll");
             pitchEntry = ntable->GetEntry("pitch");
             yawEntry = ntable->GetEntry("yaw");

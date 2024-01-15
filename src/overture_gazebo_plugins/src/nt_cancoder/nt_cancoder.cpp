@@ -6,6 +6,7 @@
 #include <gazebo/common/common.hh>
 #include <networktables/NetworkTableInstance.h>
 #include <networktables/NetworkTableEntry.h>
+#include <overture_filters/low_pass_filter/low_pass_filter.h>
 
 namespace gazebo {
     class NTCANCoder : public ModelPlugin {
@@ -29,7 +30,18 @@ namespace gazebo {
 
             updateConnection = event::Events::ConnectWorldUpdateEnd([this] { Update(); });
 
-            const auto ntable = ntInst.GetTable(model->GetName())->GetSubTable(jointName);
+            ntInst = nt::NetworkTableInstance::GetDefault();
+            ntInst.SetServer("127.0.0.1");
+            std::stringstream  ntIdentity;
+            ntIdentity << "nt_cancoder_plugin_" << model->GetName() << "_" << jointName;
+            ntInst.StartClient4(ntIdentity.str());
+
+            std::string modelScopedName = model->GetScopedName();
+
+            std::string const result = std::regex_replace( modelScopedName, std::regex( "\\::" ), "/" );
+
+
+            const auto ntable = ntInst.GetTable(result)->GetSubTable("cancoders")->GetSubTable(jointName);
             encoderSpeedEntry = ntable->GetEntry("cancoder_speed");
             encoderPositionEntry = ntable->GetEntry("cancoder_position");
 
@@ -40,10 +52,7 @@ namespace gazebo {
         void Update() {
             encoderPositionEntry.SetDouble(sourceJoint->Position() / ( 2 * M_PI));
 
-            double newEncoderSpeed = sourceJoint->GetVelocity(0)  / (2.0 * M_PI);
-            double encoderSpeed = beta * lastSpeed + (1 - beta)*newEncoderSpeed;
-            lastSpeed = encoderSpeed;
-
+            double encoderSpeed = speedLPF.Update(sourceJoint->GetVelocity(0)) / (2.0 * M_PI);
             encoderSpeedEntry.SetDouble(encoderSpeed);
         }
 
@@ -53,9 +62,7 @@ namespace gazebo {
         nt::NetworkTableInstance ntInst;
         nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry;
 
-        double lastSpeed = 0;
-        const double beta = std::exp(-1 * 25 * 0.001);
-
+        LowPassFilter speedLPF {25,  1.0 / 1000.0};
     };
 
     GZ_REGISTER_MODEL_PLUGIN(NTCANCoder);

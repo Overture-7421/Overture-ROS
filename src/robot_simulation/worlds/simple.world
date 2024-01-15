@@ -71,9 +71,17 @@
     <atmosphere type='adiabatic'/>
     <physics type='ode'>
        <ode>
-           <solver>
-             <type>world</type>
-           </solver>
+            <solver>
+                <type>quick</type>
+                <iters>1000</iters>
+                <sor>1.3</sor>
+            </solver>
+            <constraints>
+                <cfm>0.0</cfm>
+                <erp>0.1</erp>
+                <contact_max_correcting_vel>1.0</contact_max_correcting_vel>
+                <contact_surface_layer>0.001</contact_surface_layer>
+            </constraints>
        </ode>
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>

@@ -8,6 +8,7 @@ add_compile_options(-std=c++20 -O3)
 find_package(catkin REQUIRED COMPONENTS
         roscpp
         gazebo_ros
+        overture_filters
 )
 
 # Depend on system install of Gazebo
