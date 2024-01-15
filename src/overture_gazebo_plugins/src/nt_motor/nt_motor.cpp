@@ -67,6 +67,10 @@ namespace gazebo {
                 return;
             }
 
+            if(sdf->HasElement("inverted")){
+                inverted = sdf->Get<bool>("inverted");
+            }
+
             if (sdf->HasElement("gear_ratio")) {
                 gear_ratio = sdf->Get<double >("gear_ratio");
             }
@@ -116,10 +120,6 @@ namespace gazebo {
             currentEntry = ntable->GetEntry("current");
             torqueAppliedEntry = ntable->GetEntry("torque");
 
-            debug1 = ntable->GetEntry("debug1");
-            debug2 = ntable->GetEntry("debug2");
-            debug3 = ntable->GetEntry("debug3");
-
             encoderSpeedEntry.SetDouble(0);
             encoderPositionEntry.SetDouble(0);
             voltageEntry.SetDouble(0);
@@ -140,14 +140,12 @@ namespace gazebo {
             double jointSpeed = lowPassFilter.Update((jointPosition - lastPos) / SIM_UPDATE_PERIOD);
             lastPos = jointPosition;
 
-            const auto relativeVels = childLink->RelativeAngularVel();
 
-            debug1.SetDouble(relativeVels.X());
-            debug2.SetDouble(relativeVels.Y());
-            debug3.SetDouble(relativeVels.Z());
+            auto appliedVoltage = units::volt_t (voltageEntry.GetDouble(0));
 
-
-            const auto appliedVoltage = units::volt_t (voltageEntry.GetDouble(0));
+            if(inverted) {
+                    appliedVoltage = units::volt_t (appliedVoltage.value() * -1.0);
+            }
 
             const auto current = motor.Current(units::radians_per_second_t(jointSpeed), appliedVoltage);
 
@@ -194,7 +192,7 @@ namespace gazebo {
         physics::ModelPtr model;
         event::ConnectionPtr updateConnection;
         nt::NetworkTableInstance ntInst;
-        nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry, voltageEntry, currentEntry, torqueAppliedEntry, debug1, debug2, debug3;
+        nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry, voltageEntry, currentEntry, torqueAppliedEntry;
 
         LowPassFilter lowPassFilter {25, SIM_UPDATE_PERIOD};
         common::Time lastUpdateSimTime;
@@ -203,6 +201,7 @@ namespace gazebo {
         double gear_ratio = 1.0;
         int motor_count = 1;
         char torque_axis = 'z';
+        bool inverted = false;
     };
 
 

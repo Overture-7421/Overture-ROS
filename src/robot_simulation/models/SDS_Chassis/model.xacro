@@ -2,6 +2,7 @@
 <sdf version='1.7' xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find robot_simulation)/models/SDS_Module/SDS_Module.xacro"/>
     <model name="SDS_Chassis">
+        <pose>0 0 0.068978 0 0 0</pose>
         <static>0</static>
         <allow_auto_disable>1</allow_auto_disable>
 
@@ -99,8 +100,8 @@
           </link>
 
           <xacro:SDL_Module suffix="FL" x="0.289486"    y="0.289486"    z="0.016516" parent_link="Frames" roll="0" pitch="0" yaw="0"/>
-          <xacro:SDL_Module suffix="FR" x="0.289486"    y="-0.289486"   z="0.016516" parent_link="Frames" roll="0" pitch="0" yaw="-1.5708"/>
-          <xacro:SDL_Module suffix="BL" x="-0.289486"   y="0.289486"    z="0.016516" parent_link="Frames" roll="0" pitch="0" yaw="1.5708"/>
-          <xacro:SDL_Module suffix="BR" x="-0.289486"   y="-0.289486"   z="0.016516" parent_link="Frames" roll="0" pitch="0" yaw="-3.141516"/>
+          <xacro:SDL_Module suffix="FR" x="0.289486"    y="-0.289486"   z="0.016516" parent_link="Frames" roll="0" pitch="0" yaw="-1.5708"      rotation_offset="${1.5708}"/>
+          <xacro:SDL_Module suffix="BL" x="-0.289486"   y="0.289486"    z="0.016516" parent_link="Frames" roll="0" pitch="0" yaw="1.5708"       rotation_offset="${-1.5708}"/>
+          <xacro:SDL_Module suffix="BR" x="-0.289486"   y="-0.289486"   z="0.016516" parent_link="Frames" roll="0" pitch="0" yaw="-3.141516"    rotation_offset="${3.141516}"/>
     </model>
 </sdf>

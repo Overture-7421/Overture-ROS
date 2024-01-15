@@ -31,12 +31,16 @@
           <surface>
             <contact>
               <collide_bitmask>65535</collide_bitmask>
-              <ode/>
+              <ode>
+                <min_depth>0.01</min_depth>
+                <kp>1e15</kp>
+                <kd>1e13</kd>
+              </ode>
             </contact>
             <friction>
               <ode>
                 <mu>100</mu>
-                <mu2>50</mu2>
+                <mu2>100</mu2>
               </ode>
               <torsional>
                 <ode/>
@@ -70,14 +74,14 @@
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type='adiabatic'/>
     <physics type='ode'>
-        <solver>
-          <type>quick</type>
-          <iters>2000</iters>
-        </solver>
-        <constraints>
-          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
-          <contact_surface_layer>0.001</contact_surface_layer>
-        </constraints>
+      <solver>
+        <type>quick</type>
+        <iters>2000</iters>
+      </solver>
+      <constraints>
+        <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+        <contact_surface_layer>0.0001</contact_surface_layer>
+      </constraints>
     </physics>
     <scene>
       <ambient>0.4 0.4 0.4 1</ambient>
