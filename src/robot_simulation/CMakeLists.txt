@@ -9,6 +9,7 @@ project(robot_simulation)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   gazebo_ros
+        xacro
 )
 
 ## System dependencies are found with CMake's conventions
@@ -202,3 +203,18 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+file(GLOB xacro_files models/**/model.xacro)
+
+foreach(it ${xacro_files})
+    # remove .xacro extension
+    string(REGEX MATCH "(.*)[.]xacro$" unused ${it})
+    set(output_filename ${CMAKE_MATCH_1}.sdf)
+
+    # create a rule to generate ${output_filename} from {it}
+    xacro_add_xacro_file(${it} ${output_filename})
+
+    list(APPEND model_files ${output_filename})
+endforeach(it)
+
+add_custom_target(models_sdf ALL DEPENDS ${model_files})
