@@ -1,0 +1,608 @@
+<?xml version='1.0'?>
+<sdf version='1.7' xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find robot_simulation)/models/SDS_Module/SDS_Module.xacro"/>
+    <model name="FirstRobotConcept">
+        <pose>0 0 0.068980 0 0 0</pose>
+        <static>0</static>
+        <allow_auto_disable>1</allow_auto_disable>
+        <link name='chassis'>
+            <inertial>
+                <mass>2.24289</mass>
+                <inertia>
+                    <ixx>0.15690582</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.15690582</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.31238192</izz>
+                </inertia>
+                <pose>0 0 0 0 0 0</pose>
+            </inertial>
+            <pose>0 0 0 0 0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/Chassis.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/Chassis_Collision.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+            <sensor name="imu_sensor" type="imu">
+                <always_on>true</always_on>
+                <update_rate>100</update_rate>
+                <visualize>true</visualize>
+                <plugin filename="libnt_imu_plugin.so" name="imu_plugin"/>
+            </sensor>
+        </link>
+
+        <link name='arm'>
+            <inertial>
+                <mass>1</mass>
+                <inertia>
+                    <ixx>0.166667</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.166667</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.166667</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 0</pose>
+            </inertial>
+            <pose>-0.200448 0 0.385949 0 -0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/Arm.dae</uri>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/Arm_Collision.dae</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+
+        <link name='shooter'>
+            <inertial>
+                <mass>1</mass>
+                <inertia>
+                    <ixx>0.166667</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.166667</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.166667</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 0</pose>
+            </inertial>
+            <pose>-0.200341 0 0.868482 0 -0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/Shooter.dae</uri>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/Shooter_Collision.dae</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+
+        <link name='intake_wheels'>
+            <inertial>
+                <mass>1</mass>
+                <inertia>
+                    <ixx>0.166667</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.166667</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.166667</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 0</pose>
+            </inertial>
+            <pose>0.413152 0.026016 0.088726 0 -0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/IntakeWheels.dae</uri>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/IntakeWheels_Collision.dae</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+
+        <link name='shooter_roller'>
+            <inertial>
+                <mass>1</mass>
+                <inertia>
+                    <ixx>0.166667</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.166667</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.166667</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 0</pose>
+            </inertial>
+            <pose>-0.302184 0 0.969551 0 -0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/Roller.dae</uri>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/Roller.dae</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+
+        <link name='supports'>
+            <inertial>
+                <mass>1</mass>
+                <inertia>
+                    <ixx>0.166667</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.166667</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.166667</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 0</pose>
+            </inertial>
+            <pose>-0.231217 0 0.313292 0 -0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/Supports.dae</uri>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FirstRobotConcept/Supports.dae</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+
+        <joint name='arm_joint' type='revolute'>
+            <parent>chassis</parent>
+            <child>arm</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.1</damping>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+
+        <joint name='shooter_arm_joint' type='revolute'>
+            <parent>arm</parent>
+            <child>shooter</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.1</damping>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+
+        <joint name='intake_wheels_joint' type='revolute'>
+            <parent>chassis</parent>
+            <child>intake_wheels</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.1</damping>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+
+        <joint name='supports_joint' type='revolute'>
+            <parent>chassis</parent>
+            <child>supports</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.1</damping>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+
+        <joint name='shooter_roller_joint' type='revolute'>
+            <parent>shooter</parent>
+            <child>shooter_roller</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.1</damping>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+        
+        <plugin name='NTMotor_FirstRobotConcept_Arm' filename='libnt_motor_plugin.so'>
+            <joint_name>arm_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>150</gear_ratio>
+        </plugin>
+
+
+        <plugin name='NTMotor_FirstRobotConcept_Shooter_Arm' filename='libnt_motor_plugin.so'>
+            <joint_name>shooter_arm_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>80</gear_ratio>
+        </plugin>
+
+
+        <plugin name='NTMotor_FirstRobotConcept_Intake' filename='libnt_motor_plugin.so'>
+            <joint_name>intake_wheels_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>0.5</gear_ratio>
+        </plugin>
+
+        <plugin name='NTMotor_FirstRobotConcept_Shooter' filename='libnt_motor_plugin.so'>
+            <joint_name>shooter_roller_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>0.5</gear_ratio>
+        </plugin>
+
+        <plugin name='NTMotor_FirstRobotConcept_Supports' filename='libnt_motor_plugin.so'>
+            <joint_name>supports_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>50</gear_ratio>
+        </plugin>
+
+
+        <xacro:SDL_Module suffix="FL" x="0.263975"    y="0.263975"    z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="0"/>
+        <xacro:SDL_Module suffix="FR" x="0.263975"    y="-0.263975"   z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="-1.5708"      rotation_offset="${1.5708}"/>
+        <xacro:SDL_Module suffix="BL" x="-0.263975"   y="0.263975"    z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="1.5708"       rotation_offset="${-1.5708}"/>
+        <xacro:SDL_Module suffix="BR" x="-0.263975"   y="-0.263975"   z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="-3.141516"    rotation_offset="${3.141516}"/>
+    </model>
+</sdf>

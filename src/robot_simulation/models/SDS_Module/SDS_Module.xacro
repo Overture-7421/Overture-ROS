@@ -313,7 +313,7 @@
             <joint_name>${model_name}_rotation_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>z</torque_axis>
-            <motor_model>Falcon</motor_model>
+            <motor_model>FalconFOC</motor_model>
             <inverted>true</inverted>
             <gear_ratio>21.4285714286</gear_ratio>
         </plugin>
@@ -322,7 +322,7 @@
             <joint_name>${model_name}_wheel_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
-            <motor_model>Falcon</motor_model>
+            <motor_model>FalconFOC</motor_model>
             <gear_ratio>5.9027777</gear_ratio>
         </plugin>
 
