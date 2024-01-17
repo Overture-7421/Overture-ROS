@@ -7,14 +7,14 @@
         <allow_auto_disable>1</allow_auto_disable>
         <link name='chassis'>
             <inertial>
-                <mass>2.24289</mass>
+                <mass>18.146</mass>
                 <inertia>
-                    <ixx>0.15690582</ixx>
+                    <ixx>0.48029279</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.15690582</iyy>
+                    <iyy>0.87323054</iyy>
                     <iyz>0</iyz>
-                    <izz>0.31238192</izz>
+                    <izz>1.2850967</izz>
                 </inertia>
                 <pose>0 0 0 0 0 0</pose>
             </inertial>
@@ -79,14 +79,14 @@
 
         <link name='arm'>
             <inertial>
-                <mass>1</mass>
+                <mass>13.6</mass>
                 <inertia>
-                    <ixx>0.166667</ixx>
+                    <ixx>0.29780117</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.166667</iyy>
+                    <iyy>0.63985068</iyy>
                     <iyz>0</iyz>
-                    <izz>0.166667</izz>
+                    <izz>0.74612684</izz>
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
@@ -143,14 +143,14 @@
 
         <link name='shooter'>
             <inertial>
-                <mass>1</mass>
+                <mass>6.804</mass>
                 <inertia>
-                    <ixx>0.166667</ixx>
+                    <ixx>0.06948236</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.166667</iyy>
+                    <iyy>0.13982928</iyy>
                     <iyz>0</iyz>
-                    <izz>0.166667</izz>
+                    <izz>0.13970095</izz>
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
@@ -207,14 +207,14 @@
 
         <link name='intake_wheels'>
             <inertial>
-                <mass>1</mass>
+                <mass>0.680389</mass>
                 <inertia>
-                    <ixx>0.166667</ixx>
+                    <ixx>0.00000631</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.166667</iyy>
+                    <iyy>0.02211556</iyy>
                     <iyz>0</iyz>
-                    <izz>0.166667</izz>
+                    <izz>0.01211556</izz>
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
@@ -271,14 +271,14 @@
 
         <link name='shooter_roller'>
             <inertial>
-                <mass>1</mass>
+                <mass>0.680389</mass>
                 <inertia>
-                    <ixx>0.166667</ixx>
+                    <ixx>0.00000631</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.166667</iyy>
+                    <iyy>0.03211556</iyy>
                     <iyz>0</iyz>
-                    <izz>0.166667</izz>
+                    <izz>0.01211556</izz>
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
@@ -335,14 +335,14 @@
 
         <link name='supports'>
             <inertial>
-                <mass>1</mass>
+                <mass>9.072</mass>
                 <inertia>
-                    <ixx>0.166667</ixx>
+                    <ixx>0.238</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.166667</iyy>
+                    <iyy>0.935</iyy>
                     <iyz>0</iyz>
-                    <izz>0.166667</izz>
+                    <izz>0.71999384</izz>
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
@@ -412,7 +412,7 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.1</damping>
+                    <damping>0.75</damping>
                 </dynamics>
             </axis>
             <physics>
@@ -476,7 +476,7 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.1</damping>
+                    <damping>0.01</damping>
                 </dynamics>
             </axis>
             <physics>
@@ -508,7 +508,7 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.1</damping>
+                    <damping>0.4</damping>
                 </dynamics>
             </axis>
             <physics>
@@ -540,7 +540,7 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.1</damping>
+                    <damping>0.01</damping>
                 </dynamics>
             </axis>
             <physics>
@@ -563,6 +563,7 @@
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>150</gear_ratio>
+            <motor_count>2</motor_count>
         </plugin>
 
 
@@ -589,6 +590,7 @@
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>0.5</gear_ratio>
+            <motor_count>2</motor_count>
         </plugin>
 
         <plugin name='NTMotor_FirstRobotConcept_Supports' filename='libnt_motor_plugin.so'>
@@ -597,8 +599,21 @@
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>50</gear_ratio>
+            <motor_count>2</motor_count>
         </plugin>
 
+
+        <plugin name='NTMotor_FirstRobotConcept_Arm_Encoder' filename='libnt_cancoder_plugin.so'>
+            <joint_name>arm_joint</joint_name>
+        </plugin>
+
+        <plugin name='NTMotor_FirstRobotConcept_Arm_Shooter_Encoder' filename='libnt_cancoder_plugin.so'>
+            <joint_name>shooter_arm_joint</joint_name>
+        </plugin>
+
+        <plugin name='NTMotor_FirstRobotConcept_Support_Encoder' filename='libnt_cancoder_plugin.so'>
+            <joint_name>supports_joint</joint_name>
+        </plugin>
 
         <xacro:SDL_Module suffix="FL" x="0.263975"    y="0.263975"    z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="0"/>
         <xacro:SDL_Module suffix="FR" x="0.263975"    y="-0.263975"   z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="-1.5708"      rotation_offset="${1.5708}"/>
