@@ -18,6 +18,10 @@ namespace gazebo {
         NTMotorPlugin(): ModelPlugin() {
         }
 
+        void Init() override{
+            initialPos = controlledJoint->Position();
+        }
+
         void Load(physics::ModelPtr model, sdf::ElementPtr sdf) override {
             this->model = model;
 
@@ -172,7 +176,7 @@ namespace gazebo {
 
             childLink->AddRelativeTorque(torque);
 
-            double rotations = jointPosition * gear_ratio / (2.0 * M_PI);
+            double rotations = (jointPosition - initialPos) * gear_ratio / (2.0 * M_PI);
             encoderPositionEntry.SetDouble(rotations);
 
             double encoderSpeed = jointSpeed * gear_ratio / (2.0 * M_PI);
@@ -197,6 +201,8 @@ namespace gazebo {
         LowPassFilter lowPassFilter {25, SIM_UPDATE_PERIOD};
         common::Time lastUpdateSimTime;
         double lastPos = 0;
+
+        double initialPos = 0;
 
         double gear_ratio = 1.0;
         int motor_count = 1;

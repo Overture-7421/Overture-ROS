@@ -540,7 +540,7 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.01</damping>
+                    <damping>0.1</damping>
                 </dynamics>
             </axis>
             <physics>
