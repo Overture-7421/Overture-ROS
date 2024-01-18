@@ -251,8 +251,8 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.02</damping>
-                    <friction>3.5</friction>
+                    <damping>1.3</damping>
+                    <friction>0.0</friction>
                 </dynamics>
             </axis>
             <physics>
@@ -314,8 +314,8 @@
             <joint_axis>0</joint_axis>
             <torque_axis>z</torque_axis>
             <motor_model>FalconFOC</motor_model>
-            <inverted>true</inverted>
             <gear_ratio>21.4285714286</gear_ratio>
+            <mechanically_inverted>true</mechanically_inverted>
         </plugin>
 
         <plugin name='NTMotor_${model_name}_Wheel' filename='libnt_motor_plugin.so'>
@@ -324,6 +324,7 @@
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>5.9027777</gear_ratio>
+            <mechanically_inverted>true</mechanically_inverted>
         </plugin>
 
         <plugin name='NTMotor_${model_name}_Rotation_CANCoder' filename='libnt_cancoder_plugin.so'>

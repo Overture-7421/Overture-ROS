@@ -45,6 +45,10 @@ namespace gazebo {
             std::string const result = std::regex_replace( modelScopedName, std::regex( "\\::" ), "/" );
 
 
+            if(sdf->HasElement("inverted")){
+                inverted = sdf->Get<bool>("inverted");
+            }
+
             const auto ntable = ntInst.GetTable(result)->GetSubTable("cancoders")->GetSubTable(jointName);
             encoderSpeedEntry = ntable->GetEntry("cancoder_speed");
             encoderPositionEntry = ntable->GetEntry("cancoder_position");
@@ -62,7 +66,14 @@ namespace gazebo {
             lastUpdateSimTime = currentSimTime;
 
 
-            double sensorPosition = sourceJoint->Position() / ( 2 * M_PI);
+            double sensorPosition = sourceJoint->Position() / ( 2.0 * M_PI);
+
+
+            if(inverted) {
+                sensorPosition *= -1;
+            }
+
+
             encoderPositionEntry.SetDouble(sensorPosition);
 
 
@@ -82,6 +93,8 @@ namespace gazebo {
         common::Time lastUpdateSimTime;
         LowPassFilter speedLPF {25,  SIM_UPDATE_PERIOD};
         double lastPos = 0;
+        bool inverted = false;
+
     };
 
     GZ_REGISTER_MODEL_PLUGIN(NTCANCoder);

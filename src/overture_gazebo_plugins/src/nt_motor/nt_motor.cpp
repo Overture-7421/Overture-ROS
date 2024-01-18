@@ -18,10 +18,6 @@ namespace gazebo {
         NTMotorPlugin(): ModelPlugin() {
         }
 
-        void Init() override{
-            initialPos = controlledJoint->Position();
-        }
-
         void Load(physics::ModelPtr model, sdf::ElementPtr sdf) override {
             this->model = model;
 
@@ -71,10 +67,6 @@ namespace gazebo {
                 return;
             }
 
-            if(sdf->HasElement("inverted")){
-                inverted = sdf->Get<bool>("inverted");
-            }
-
             if (sdf->HasElement("gear_ratio")) {
                 gear_ratio = sdf->Get<double >("gear_ratio");
             }
@@ -85,6 +77,10 @@ namespace gazebo {
 
             if (sdf->HasElement("torque_axis")) {
                 torque_axis = sdf->Get<char>("torque_axis");
+            }
+
+            if(sdf->HasElement("mechanically_inverted")){
+                mechanically_inverted = sdf->Get<bool>("mechanically_inverted");
             }
 
             if(motorModel == "Kraken") {
@@ -123,12 +119,18 @@ namespace gazebo {
             voltageEntry = ntable->GetEntry("voltage_applied");
             currentEntry = ntable->GetEntry("current");
             torqueAppliedEntry = ntable->GetEntry("torque");
+            invertedEntry = ntable->GetEntry("inverted");
 
             encoderSpeedEntry.SetDouble(0);
             encoderPositionEntry.SetDouble(0);
             voltageEntry.SetDouble(0);
             currentEntry.SetDouble(0);
             torqueAppliedEntry.SetDouble(0);
+            invertedEntry.SetBoolean(false);
+        }
+
+        void Init() override{
+            initialPos = controlledJoint->Position(jointAxis);
         }
 
         void Update(const common::UpdateInfo& info) {
@@ -139,23 +141,21 @@ namespace gazebo {
             }
             lastUpdateSimTime = currentSimTime;
 
-            double jointPosition = controlledJoint->Position(jointAxis);
-
-            double jointSpeed = lowPassFilter.Update((jointPosition - lastPos) / SIM_UPDATE_PERIOD);
-            lastPos = jointPosition;
-
-
+            double jointTurns = (controlledJoint->Position(jointAxis) - initialPos) / (2.0 * M_PI);
             auto appliedVoltage = units::volt_t (voltageEntry.GetDouble(0));
 
-            if(inverted) {
-                    appliedVoltage = units::volt_t (appliedVoltage.value() * -1.0);
+            double jointTurnsPerS = lowPassFilter.Update((jointTurns - lastPos) / SIM_UPDATE_PERIOD);
+            lastPos = jointTurns;
+
+            if(mechanically_inverted) {
+                appliedVoltage *= -1;
             }
 
-            const auto current = motor.Current(units::radians_per_second_t(jointSpeed), appliedVoltage);
+            auto current = motor.Current(units::radians_per_second_t(jointTurnsPerS * 2.0 * M_PI), appliedVoltage);
 
-            const auto torqueGenerated = motor.Torque(current);
+            auto torqueGenerated = motor.Torque(current);
+
             double torqueToApply = torqueGenerated.value();
-
             ignition::math::Vector3d torque;
 
             switch (torque_axis) {
@@ -176,10 +176,17 @@ namespace gazebo {
 
             childLink->AddRelativeTorque(torque);
 
-            double rotations = (jointPosition - initialPos) * gear_ratio / (2.0 * M_PI);
+
+            if(mechanically_inverted) {
+                jointTurns *= -1;
+                jointTurnsPerS *= -1;
+                current *= -1;
+            }
+
+            double rotations = jointTurns * gear_ratio;
             encoderPositionEntry.SetDouble(rotations);
 
-            double encoderSpeed = jointSpeed * gear_ratio / (2.0 * M_PI);
+            double encoderSpeed = jointTurnsPerS * gear_ratio;
             encoderSpeedEntry.SetDouble(encoderSpeed);
 
             torqueAppliedEntry.SetDouble(torqueToApply);
@@ -196,7 +203,7 @@ namespace gazebo {
         physics::ModelPtr model;
         event::ConnectionPtr updateConnection;
         nt::NetworkTableInstance ntInst;
-        nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry, voltageEntry, currentEntry, torqueAppliedEntry;
+        nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry, voltageEntry, currentEntry, torqueAppliedEntry, invertedEntry;
 
         LowPassFilter lowPassFilter {25, SIM_UPDATE_PERIOD};
         common::Time lastUpdateSimTime;
@@ -207,7 +214,7 @@ namespace gazebo {
         double gear_ratio = 1.0;
         int motor_count = 1;
         char torque_axis = 'z';
-        bool inverted = false;
+        bool mechanically_inverted = false;
     };
 
 

@@ -209,7 +209,7 @@
             <inertial>
                 <mass>0.680389</mass>
                 <inertia>
-                    <ixx>0.00000631</ixx>
+                    <ixx>0.00631</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
                     <iyy>0.02211556</iyy>
@@ -273,7 +273,7 @@
             <inertial>
                 <mass>0.680389</mass>
                 <inertia>
-                    <ixx>0.00000631</ixx>
+                    <ixx>0.00631</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
                     <iyy>0.03211556</iyy>
@@ -562,7 +562,7 @@
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
-            <gear_ratio>150</gear_ratio>
+            <gear_ratio>251</gear_ratio>
             <motor_count>2</motor_count>
         </plugin>
 
@@ -572,7 +572,7 @@
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
-            <gear_ratio>80</gear_ratio>
+            <gear_ratio>142</gear_ratio>
         </plugin>
 
 
@@ -590,7 +590,6 @@
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>0.5</gear_ratio>
-            <motor_count>2</motor_count>
         </plugin>
 
         <plugin name='NTMotor_FirstRobotConcept_Supports' filename='libnt_motor_plugin.so'>
@@ -598,26 +597,29 @@
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
-            <gear_ratio>50</gear_ratio>
+            <gear_ratio>150</gear_ratio>
             <motor_count>2</motor_count>
         </plugin>
 
 
         <plugin name='NTMotor_FirstRobotConcept_Arm_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>arm_joint</joint_name>
+            <inverted>true</inverted>
         </plugin>
 
         <plugin name='NTMotor_FirstRobotConcept_Arm_Shooter_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>shooter_arm_joint</joint_name>
+            <inverted>true</inverted>
         </plugin>
 
         <plugin name='NTMotor_FirstRobotConcept_Support_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>supports_joint</joint_name>
+            <inverted>true</inverted>
         </plugin>
 
         <xacro:SDL_Module suffix="FL" x="0.263975"    y="0.263975"    z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="0"/>
         <xacro:SDL_Module suffix="FR" x="0.263975"    y="-0.263975"   z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="-1.5708"      rotation_offset="${1.5708}"/>
         <xacro:SDL_Module suffix="BL" x="-0.263975"   y="0.263975"    z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="1.5708"       rotation_offset="${-1.5708}"/>
-        <xacro:SDL_Module suffix="BR" x="-0.263975"   y="-0.263975"   z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="-3.141516"    rotation_offset="${3.141516}"/>
+        <xacro:SDL_Module suffix="BR" x="-0.263975"   y="-0.263975"   z="0.016516" parent_link="chassis" roll="0" pitch="0" yaw="-3.141516"    rotation_offset="${3.1416}"/>
     </model>
 </sdf>
