@@ -212,14 +212,14 @@
 
         <link name='storage_wheel_left'>
             <inertial>
-                <mass>1</mass>
+                <mass>0.280389</mass>
                 <inertia>
-                    <ixx>0.166667</ixx>
+                    <ixx>0.00631</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.166667</iyy>
+                    <iyy>0.00211556</iyy>
                     <iyz>0</iyz>
-                    <izz>0.166667</izz>
+                    <izz>0.01211556</izz>
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
@@ -277,14 +277,14 @@
 
         <link name='storage_wheel_right'>
             <inertial>
-                <mass>1</mass>
+                <mass>0.280389</mass>
                 <inertia>
-                    <ixx>0.166667</ixx>
+                    <ixx>0.00631</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.166667</iyy>
+                    <iyy>0.00211556</iyy>
                     <iyz>0</iyz>
-                    <izz>0.166667</izz>
+                    <izz>0.01211556</izz>
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
@@ -437,7 +437,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/ShooterRoller_Collision.dae</uri>
+                        <uri>$(find robot_simulation)/models/7421-24/ShooterRoller.dae</uri>
                         <scale>1 1 1</scale>
                     </mesh>
                 </geometry>
@@ -866,7 +866,6 @@
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>251</gear_ratio>
             <suffix>right</suffix>
-            <mechanically_inverted>true</mechanically_inverted>
         </plugin>
 
         <plugin name='NTMotor_7421-24_Arm_Left' filename='libnt_motor_plugin.so'>
@@ -876,6 +875,7 @@
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>251</gear_ratio>
             <suffix>left</suffix>
+            <mechanically_inverted>true</mechanically_inverted>
         </plugin>
 
 
@@ -944,6 +944,13 @@
         <plugin name='NTMotor_7421-24_Support_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>chassis_supports_joint</joint_name>
             <inverted>true</inverted>
+        </plugin>
+
+        <plugin name='LinkedJoint_7421-24_Storage_Wheels' filename='liblinked_joint_plugin.so'>
+            <motor_name>shooter_storage_wheel_left_joint</motor_name>
+            <joint_target_name>shooter_storage_wheel_right_joint</joint_target_name>
+            <inverted>true</inverted>
+            <torque_axis>y</torque_axis>
         </plugin>
 
         <xacro:SDL_Module suffix="FL" x="0.264044"    y="0.264044"    z="0.045079" parent_link="chassis" roll="0" pitch="0" yaw="0"/>

@@ -35,3 +35,6 @@ target_link_libraries(nt_imu_plugin ${catkin_LIBRARIES} ntcore)
 
 add_library(nt_cancoder_plugin SHARED src/nt_cancoder/nt_cancoder.cpp)
 target_link_libraries(nt_cancoder_plugin ${catkin_LIBRARIES} ntcore)
+
+add_library(linked_joint_plugin SHARED src/linked_joint/linked_joint.cpp)
+target_link_libraries(linked_joint_plugin ${catkin_LIBRARIES})

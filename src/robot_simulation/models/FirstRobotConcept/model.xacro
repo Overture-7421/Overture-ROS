@@ -566,7 +566,6 @@
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>251</gear_ratio>
             <suffix>right</suffix>
-            <mechanically_inverted>true</mechanically_inverted>
         </plugin>
 
         <plugin name='NTMotor_FirstRobotConcept_Arm_Left' filename='libnt_motor_plugin.so'>

@@ -2,13 +2,13 @@
 // Created by ajahueym on 1/10/24.
 //
 #include <frc/system/plant/DCMotor.h>
-#include <ntcore/networktables/NetworkTableInstance.h>
 #include <ros/ros.h>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
 #include <cmath>
 #include <overture_filters/low_pass_filter/low_pass_filter.h>
+#include <ntcore/networktables/NetworkTableInstance.h>
 
 #define  SIM_UPDATE_PERIOD 0.001
 
@@ -136,7 +136,6 @@ namespace gazebo {
             voltageEntry.SetDouble(0);
             currentEntry.SetDouble(0);
             torqueAppliedEntry.SetDouble(0);
-            invertedEntry.SetBoolean(false);
         }
 
         void Init() override{
