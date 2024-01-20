@@ -559,13 +559,23 @@
             </physics>
         </joint>
         
-        <plugin name='NTMotor_FirstRobotConcept_Arm' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstRobotConcept_Arm_Right' filename='libnt_motor_plugin.so'>
             <joint_name>arm_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>251</gear_ratio>
-            <motor_count>2</motor_count>
+            <suffix>right</suffix>
+            <mechanically_inverted>true</mechanically_inverted>
+        </plugin>
+
+        <plugin name='NTMotor_FirstRobotConcept_Arm_Left' filename='libnt_motor_plugin.so'>
+            <joint_name>arm_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>251</gear_ratio>
+            <suffix>left</suffix>
         </plugin>
 
 
@@ -586,23 +596,42 @@
             <gear_ratio>0.75</gear_ratio>
         </plugin>
 
-        <plugin name='NTMotor_FirstRobotConcept_Shooter' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstRobotConcept_Shooter_Up' filename='libnt_motor_plugin.so'>
             <joint_name>shooter_roller_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>0.5</gear_ratio>
+            <suffix>up</suffix>
         </plugin>
 
-        <plugin name='NTMotor_FirstRobotConcept_Supports' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstRobotConcept_Shooter_Down' filename='libnt_motor_plugin.so'>
+            <joint_name>shooter_roller_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>0.5</gear_ratio>
+            <suffix>down</suffix>
+            <mechanically_inverted>true</mechanically_inverted>
+        </plugin>
+
+        <plugin name='NTMotor_FirstRobotConcept_Supports_Right' filename='libnt_motor_plugin.so'>
             <joint_name>supports_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>150</gear_ratio>
-            <motor_count>2</motor_count>
         </plugin>
 
+
+        <plugin name='NTMotor_FirstRobotConcept_Supports_Left' filename='libnt_motor_plugin.so'>
+            <joint_name>supports_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>150</gear_ratio>
+            <mechanically_inverted>true</mechanically_inverted>
+        </plugin>
 
         <plugin name='NTMotor_FirstRobotConcept_Arm_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>arm_joint</joint_name>

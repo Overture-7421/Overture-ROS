@@ -83,6 +83,10 @@ namespace gazebo {
                 mechanically_inverted = sdf->Get<bool>("mechanically_inverted");
             }
 
+            if(sdf->HasElement("suffix")){
+                suffix = sdf->Get<std::string>("suffix");
+            }
+
             if(motorModel == "Kraken") {
                 motor = frc::DCMotor::KrakenX60(motor_count);
             } else if (motorModel == "NEO") {
@@ -113,7 +117,13 @@ namespace gazebo {
 
             std::string const result = std::regex_replace( modelScopedName, std::regex( "\\::" ), "/" );
 
+            if(!suffix.empty()){
+                jointName += "_";
+                jointName += suffix;
+            }
+
             const auto ntable = ntInst.GetTable(result)->GetSubTable("motors")->GetSubTable(jointName);
+
             encoderSpeedEntry = ntable->GetEntry("encoder_speed");
             encoderPositionEntry = ntable->GetEntry("encoder_position");
             voltageEntry = ntable->GetEntry("voltage_applied");
@@ -215,6 +225,7 @@ namespace gazebo {
         int motor_count = 1;
         char torque_axis = 'z';
         bool mechanically_inverted = false;
+        std::string suffix = "";
     };
 
 
