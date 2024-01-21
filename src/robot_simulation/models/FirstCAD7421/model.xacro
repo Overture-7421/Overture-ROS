@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <sdf version='1.7' xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find robot_simulation)/models/SDS_Module/SDS_Module.xacro"/>
-    <model name="7421-24">
+    <model name="FirstCAD7421">
         <pose>0 0 0.040368 0 0 0</pose>
         <static>0</static>
         <allow_auto_disable>1</allow_auto_disable>
@@ -27,7 +27,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/Chassis.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/Chassis.dae</uri>
                         <scale>1 1 1</scale>
                     </mesh>
                 </geometry>
@@ -40,7 +40,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/Chassis_Collision.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/Chassis_Collision.dae</uri>
                         <scale>1 1 1</scale>
                     </mesh>
                 </geometry>
@@ -99,7 +99,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/Arm.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/Arm.dae</uri>
                         <scale>1 1 1</scale>
                     </mesh>
                 </geometry>
@@ -112,7 +112,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/Arm_Collision.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/Arm_Collision.dae</uri>
                         <scale>1 1 1</scale>
                     </mesh>
                 </geometry>
@@ -166,7 +166,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/Shooter.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/Shooter.dae</uri>
                         <scale>1 1 1</scale>
                     </mesh>
                 </geometry>
@@ -179,7 +179,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/Shooter_Collision.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/Shooter_Collision.dae</uri>
                         <scale>1 1 1</scale>
                     </mesh>
                 </geometry>
@@ -232,7 +232,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/StorageWheels.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/StorageWheels.dae</uri>
                     </mesh>
                 </geometry>
                 <transparency>0</transparency>
@@ -244,7 +244,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/StorageWheels_Collision.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/StorageWheels_Collision.dae</uri>
                     </mesh>
                 </geometry>
                 <surface>
@@ -297,7 +297,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/StorageWheels.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/StorageWheels.dae</uri>
                     </mesh>
                 </geometry>
                 <transparency>0</transparency>
@@ -309,7 +309,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/StorageWheels_Collision.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/StorageWheels_Collision.dae</uri>
                     </mesh>
                 </geometry>
                 <surface>
@@ -361,7 +361,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/ShooterRoller.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/ShooterRoller.dae</uri>
                     </mesh>
                 </geometry>
                 <transparency>0</transparency>
@@ -373,7 +373,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/ShooterRoller.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/ShooterRoller.dae</uri>
                     </mesh>
                 </geometry>
                 <surface>
@@ -425,7 +425,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/ShooterRoller.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/ShooterRoller.dae</uri>
                     </mesh>
                 </geometry>
                 <transparency>0</transparency>
@@ -437,7 +437,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/ShooterRoller.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/ShooterRoller.dae</uri>
                         <scale>1 1 1</scale>
                     </mesh>
                 </geometry>
@@ -490,7 +490,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/Supports.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/Supports.dae</uri>
                     </mesh>
                 </geometry>
                 <transparency>0</transparency>
@@ -502,7 +502,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/Supports_Collision.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/Supports_Collision.dae</uri>
                     </mesh>
                 </geometry>
                 <surface>
@@ -554,7 +554,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/IntakeWheels.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/IntakeWheels.dae</uri>
                     </mesh>
                 </geometry>
                 <transparency>0</transparency>
@@ -566,7 +566,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>$(find robot_simulation)/models/7421-24/IntakeWheels_Collision.dae</uri>
+                        <uri>$(find robot_simulation)/models/FirstCAD7421/IntakeWheels_Collision.dae</uri>
                     </mesh>
                 </geometry>
                 <surface>
@@ -596,6 +596,50 @@
             </collision>
         </link>
 
+        <model name='camera'>
+            <static>true</static>
+            <pose>0.5 0 0.5 0 0 0</pose>
+            <link name='link'>
+                <visual name='visual'>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.1 0.1</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <sensor name='my_camera' type='camera'>
+                    <camera>
+                        <horizontal_fov>1.047</horizontal_fov>
+                        <image>
+                            <width>1920</width>
+                            <height>1080</height>
+                        </image>
+                        <clip>
+                            <near>0.1</near>
+                            <far>100</far>
+                        </clip>
+                    </camera>
+                    <always_on>1</always_on>
+                    <update_rate>120</update_rate>
+
+                    <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                        <alwaysOn>true</alwaysOn>
+                        <updateRate>0.0</updateRate>
+                        <cameraName>camera</cameraName>
+                        <imageTopicName>image_raw</imageTopicName>
+                        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                        <frameName>link</frameName>
+                        <robotNamespace>FirstCAD7421</robotNamespace>
+                        <hackBaseline>0.07</hackBaseline>
+                        <distortionK1>0.0</distortionK1>
+                        <distortionK2>0.0</distortionK2>
+                        <distortionK3>0.0</distortionK3>
+                        <distortionT1>0.0</distortionT1>
+                        <distortionT2>0.0</distortionT2>
+                    </plugin>
+                </sensor>
+            </link>
+        </model>
         
         <joint name='chassis_arm_joint' type='revolute'>
             <parent>chassis</parent>
@@ -859,7 +903,7 @@
             </physics>
         </joint>
 
-        <plugin name='NTMotor_7421-24_Arm_Right' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Arm_Right' filename='libnt_motor_plugin.so'>
             <joint_name>chassis_arm_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
@@ -868,7 +912,7 @@
             <suffix>right</suffix>
         </plugin>
 
-        <plugin name='NTMotor_7421-24_Arm_Left' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Arm_Left' filename='libnt_motor_plugin.so'>
             <joint_name>chassis_arm_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
@@ -879,7 +923,7 @@
         </plugin>
 
 
-        <plugin name='NTMotor_7421-24_Shooter_Arm' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Shooter_Arm' filename='libnt_motor_plugin.so'>
             <joint_name>arm_shooter_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
@@ -888,7 +932,7 @@
         </plugin>
 
 
-        <plugin name='NTMotor_7421-24_Intake' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Intake' filename='libnt_motor_plugin.so'>
             <joint_name>chassis_intake_wheels_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
@@ -896,7 +940,7 @@
             <gear_ratio>1</gear_ratio>
         </plugin>
 
-        <plugin name='NTMotor_7421-24_Shooter_Up' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Shooter_Up' filename='libnt_motor_plugin.so'>
             <joint_name>shooter_roller_up_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
@@ -904,7 +948,7 @@
             <gear_ratio>0.416666667</gear_ratio>
         </plugin>
 
-        <plugin name='NTMotor_7421-24_Shooter_Down' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Shooter_Down' filename='libnt_motor_plugin.so'>
             <joint_name>shooter_roller_down_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
@@ -913,7 +957,7 @@
             <mechanically_inverted>true</mechanically_inverted>
         </plugin>
 
-        <plugin name='NTMotor_7421-24_Storage' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Storage' filename='libnt_motor_plugin.so'>
             <joint_name>shooter_storage_wheel_left_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
@@ -922,7 +966,7 @@
             <mechanically_inverted>true</mechanically_inverted>
         </plugin>
 
-        <plugin name='NTMotor_7421-24_Supports' filename='libnt_motor_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Supports' filename='libnt_motor_plugin.so'>
             <joint_name>chassis_supports_joint</joint_name>
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
@@ -931,22 +975,22 @@
         </plugin>
 
 
-        <plugin name='NTMotor_7421-24_Arm_Encoder' filename='libnt_cancoder_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Arm_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>chassis_arm_joint</joint_name>
             <inverted>true</inverted>
         </plugin>
 
-        <plugin name='NTMotor_7421-24_Arm_Shooter_Encoder' filename='libnt_cancoder_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Arm_Shooter_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>arm_shooter_joint</joint_name>
             <inverted>true</inverted>
         </plugin>
 
-        <plugin name='NTMotor_7421-24_Support_Encoder' filename='libnt_cancoder_plugin.so'>
+        <plugin name='NTMotor_FirstCAD7421_Support_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>chassis_supports_joint</joint_name>
             <inverted>true</inverted>
         </plugin>
 
-        <plugin name='LinkedJoint_7421-24_Storage_Wheels' filename='liblinked_joint_plugin.so'>
+        <plugin name='LinkedJoint_FirstCAD7421_Storage_Wheels' filename='liblinked_joint_plugin.so'>
             <motor_name>shooter_storage_wheel_left_joint</motor_name>
             <joint_target_name>shooter_storage_wheel_right_joint</joint_target_name>
             <inverted>true</inverted>
