@@ -1,0 +1,6 @@
+[submodule "src/web_video_server"]
+	path = src/web_video_server
+	url = https://github.com/RobotWebTools/web_video_server.git
+[submodule "src/async_web_server_cpp"]
+	path = src/async_web_server_cpp
+	url = https://github.com/fkie/async_web_server_cpp.git

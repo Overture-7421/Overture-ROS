@@ -8,4 +8,9 @@
     <arg name="debug" value="false"/>
     <arg name="verbose" value="true"/>
   </include>
+
+  <node pkg="web_video_server" type="web_video_server" name="web_video_server">
+    <param name="port" type="int" value="8081" />
+
+  </node>
 </launch>
