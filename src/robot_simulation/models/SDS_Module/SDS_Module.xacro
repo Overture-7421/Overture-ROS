@@ -228,7 +228,7 @@
                     </friction>
                     <contact>
                         <ode>
-                            <min_depth>0.001</min_depth>
+                            <min_depth>0.01</min_depth>
                             <kp>1e15</kp>
                             <kd>1</kd>
                         </ode>

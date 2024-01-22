@@ -596,47 +596,45 @@
             </collision>
         </link>
 
-        <model name='camera'>
-            <static>true</static>
+        <link name='test_camera'>
             <pose>0.5 0 0.5 0 0 0</pose>
-            <link name='link'>
-                <visual name='visual'>
-                    <geometry>
-                        <box>
-                            <size>0.1 0.1 0.1</size>
-                        </box>
-                    </geometry>
-                </visual>
-                <sensor name='my_camera' type='camera'>
-                    <camera>
-                        <horizontal_fov>1.047</horizontal_fov>
-                        <image>
-                            <width>1920</width>
-                            <height>1080</height>
-                        </image>
-                    </camera>
-                    <always_on>1</always_on>
-                    <update_rate>120</update_rate>
+            <visual name='visual'>
+                <geometry>
+                    <box>
+                        <size>0.1 0.1 0.1</size>
+                    </box>
+                </geometry>
+            </visual>
+            <sensor name='my_camera' type='camera'>
+                <camera>
+                    <horizontal_fov>1.047</horizontal_fov>
+                    <image>
+                        <width>1920</width>
+                        <height>1080</height>
+                    </image>
+                </camera>
+                <always_on>1</always_on>
+                <update_rate>120</update_rate>
 
-                    <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-                        <alwaysOn>true</alwaysOn>
-                        <updateRate>120</updateRate>
-                        <cameraName>camera</cameraName>
-                        <imageTopicName>image_raw</imageTopicName>
-                        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-                        <frameName>link</frameName>
-                        <robotNamespace>FirstCAD7421</robotNamespace>
-                        <hackBaseline>0.07</hackBaseline>
-                        <distortionK1>0.0</distortionK1>
-                        <distortionK2>0.0</distortionK2>
-                        <distortionK3>0.0</distortionK3>
-                        <distortionT1>0.0</distortionT1>
-                        <distortionT2>0.0</distortionT2>
-                    </plugin>
-                </sensor>
-            </link>
-        </model>
-        
+                <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                    <alwaysOn>true</alwaysOn>
+                    <updateRate>120</updateRate>
+                    <cameraName>camera</cameraName>
+                    <imageTopicName>image_raw</imageTopicName>
+                    <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                    <frameName>test_camera</frameName>
+                    <robotNamespace>FirstCAD7421</robotNamespace>
+                    <hackBaseline>0.07</hackBaseline>
+                    <distortionK1>0.0</distortionK1>
+                    <distortionK2>0.0</distortionK2>
+                    <distortionK3>0.0</distortionK3>
+                    <distortionT1>0.0</distortionT1>
+                    <distortionT2>0.0</distortionT2>
+                </plugin>
+            </sensor>
+        </link>
+
+
         <joint name='chassis_arm_joint' type='revolute'>
             <parent>chassis</parent>
             <child>arm</child>
@@ -897,6 +895,11 @@
                     </suspension>
                 </ode>
             </physics>
+        </joint>
+
+        <joint name='chassis_test_camera' type='fixed'>
+            <parent>chassis</parent>
+            <child>test_camera</child>
         </joint>
 
         <plugin name='NTMotor_FirstCAD7421_Arm_Right' filename='libnt_motor_plugin.so'>

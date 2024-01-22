@@ -32,7 +32,7 @@
             <contact>
               <collide_bitmask>65535</collide_bitmask>
               <ode>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.01</min_depth>
                 <kp>1e15</kp>
                 <kd>1e13</kd>
               </ode>
@@ -50,21 +50,6 @@
           </surface>
           <max_contacts>10</max_contacts>
         </collision>
-        <visual name='visual'>
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-          </material>
-        </visual>
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>

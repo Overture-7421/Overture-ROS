@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<sdf version='1.7' xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <model name="VisionCalibration2024">
+        <pose>0 0 0 0 0 0</pose>
+        <static>1</static>
+        <allow_auto_disable>1</allow_auto_disable>
+        <link name='table'>
+            <pose>0 0 0 0 0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/VisionCalibration2024/VisionCalibration2024.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+                </geometry>
+                <material>
+                    <lighting>0</lighting>
+                    <script>
+                        <uri>$(find robot_simulation)/models/VisionCalibration2024/texture.material</uri>
+                        <name>VisionCalibration2024</name>
+                    </script>
+                    <shader type='pixel'>
+                        <normal_map>__default__</normal_map>
+                    </shader>
+                    <ambient>0.3 0.3 0.3 1</ambient>
+                    <diffuse>0.7 0.7 0.7 1</diffuse>
+                    <specular>0.01 0.01 0.01 1</specular>
+                    <emissive>0 0 0 1</emissive>
+                </material>
+                <transparency>0</transparency>
+                <cast_shadows>0</cast_shadows>
+            </visual>
+        </link>
+    </model>
+</sdf>

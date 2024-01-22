@@ -1,0 +1,15 @@
+material VisionCalibration2024
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        // Relative to the location of the material script
+        texture calibration_texture.png
+        scale 1 1
+      }
+    }
+  }
+}

@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/async_web_server_cpp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/web_video_server" vcs="Git" />
   </component>
 </project>
