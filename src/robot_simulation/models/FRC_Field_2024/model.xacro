@@ -1,50 +1,8 @@
 <?xml version='1.0'?>
 <sdf version='1.7' xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <model name='ground_plane'>
+    <xacro:include filename="$(find robot_simulation)/models/FRC_Field_2024/FRC_Field_2024.xacro"/>
+    <model name="FRC_Field_2024">
         <static>1</static>
-        <link name='link'>
-            <collision name='collision'>
-                <geometry>
-                    <mesh>
-                        <uri>$(find robot_simulation)/models/FRC_Field_2024/FRC_Field_2024_Collision.dae</uri>
-                        <scale>1 1 1</scale>
-                    </mesh>
-                </geometry>
-                <surface>
-                    <contact>
-                        <collide_bitmask>65535</collide_bitmask>
-                        <ode>
-                            <min_depth>0.01</min_depth>
-                            <kp>1e15</kp>
-                            <kd>1e13</kd>
-                        </ode>
-                    </contact>
-                    <friction>
-                        <ode>
-                            <mu>100</mu>
-                            <mu2>100</mu2>
-                        </ode>
-                        <torsional>
-                            <ode/>
-                        </torsional>
-                    </friction>
-                    <bounce/>
-                </surface>
-                <max_contacts>10</max_contacts>
-            </collision>
-            <visual name='visual'>
-                <cast_shadows>0</cast_shadows>
-                <geometry>
-                    <mesh>
-                        <uri>$(find robot_simulation)/models/FRC_Field_2024/FRC_Field_2024.dae</uri>
-                        <scale>1 1 1</scale>
-                    </mesh>
-                </geometry>
-            </visual>
-            <self_collide>0</self_collide>
-            <enable_wind>0</enable_wind>
-            <kinematic>0</kinematic>
-        </link>
+        <xacro:FRC_Field_2024/>
     </model>
-
 </sdf>

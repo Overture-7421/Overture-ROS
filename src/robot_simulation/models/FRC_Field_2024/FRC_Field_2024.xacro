@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<sdf version='1.7' xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="FRC_Field_2024" params="parent_link:='' x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0">
+        <link name='field'>
+            <visual name='visual'>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FRC_Field_2024/FRC_Field_2024.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name='collision'>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/FRC_Field_2024/FRC_Field_2024_Collision.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <contact>
+                        <collide_bitmask>65535</collide_bitmask>
+                        <ode>
+                            <min_depth>0.01</min_depth>
+                            <kp>1e15</kp>
+                            <kd>1e13</kd>
+                        </ode>
+                    </contact>
+                    <friction>
+                        <ode>
+                            <mu>100</mu>
+                            <mu2>100</mu2>
+                        </ode>
+                        <torsional>
+                            <ode/>
+                        </torsional>
+                    </friction>
+                    <bounce/>
+                </surface>
+                <max_contacts>10</max_contacts>
+            </collision>
+            <self_collide>0</self_collide>
+            <enable_wind>0</enable_wind>
+            <kinematic>0</kinematic>
+            <cast_shadows>0</cast_shadows>
+        </link>
+    </xacro:macro>
+
+</sdf>

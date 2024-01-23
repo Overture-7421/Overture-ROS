@@ -1,7 +1,8 @@
 <launch>
+    <param name="world_name" type="str" value="simple.world" />
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find robot_simulation)/worlds/simple.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+    <arg name="world_name" value="$(arg world_name)"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
     <arg name="paused" value="false"/>
     <arg name="gui" value="true"/>
     <arg name="recording" value="false"/>
@@ -10,7 +11,7 @@
   </include>
 
   <node pkg="web_video_server" type="web_video_server" name="web_video_server">
-    <param name="port" type="int" value="8081" />
+    <param name="port" type="int" value="8080" />
 
   </node>
 </launch>

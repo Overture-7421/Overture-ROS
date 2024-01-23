@@ -204,9 +204,9 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-file(GLOB xacro_files models/**/model.xacro)
+file(GLOB model_xacro_files models/**/model.xacro)
 
-foreach(it ${xacro_files})
+foreach(it ${model_xacro_files})
     # remove .xacro extension
     string(REGEX MATCH "(.*)[.]xacro$" unused ${it})
     set(output_filename ${CMAKE_MATCH_1}.sdf)
@@ -218,3 +218,20 @@ foreach(it ${xacro_files})
 endforeach(it)
 
 add_custom_target(models_sdf ALL DEPENDS ${model_files})
+
+
+file(GLOB world_xacro_files worlds/*.xacro worlds/**/*.xacro)
+
+foreach(it ${world_xacro_files})
+    # remove .xacro extension
+    string(REGEX MATCH "(.*)[.]xacro$" unused ${it})
+    set(output_filename ${CMAKE_MATCH_1}.world)
+
+    # create a rule to generate ${output_filename} from {it}
+    xacro_add_xacro_file(${it} ${output_filename})
+
+    list(APPEND world_files ${output_filename})
+endforeach(it)
+
+add_custom_target(worlds_sdf ALL DEPENDS ${world_files})
+
