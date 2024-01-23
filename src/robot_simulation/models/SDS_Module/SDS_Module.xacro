@@ -219,21 +219,6 @@
                         <scale>1 1 1</scale>
                     </mesh>
                 </geometry>
-                <surface>
-                    <friction>
-                        <ode>
-                            <mu>1.16</mu>
-                            <mu2>1.16</mu2>
-                        </ode>
-                    </friction>
-                    <contact>
-                        <ode>
-                            <min_depth>0.01</min_depth>
-                            <kp>1e15</kp>
-                            <kd>1</kd>
-                        </ode>
-                    </contact>
-                </surface>
             </collision>
         </link>
 

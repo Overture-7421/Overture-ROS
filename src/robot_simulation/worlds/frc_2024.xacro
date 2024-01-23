@@ -63,7 +63,8 @@
                         <contact>
                             <collide_bitmask>65535</collide_bitmask>
                             <ode>
-                                <min_depth>0.01</min_depth>
+                                <max_vel>0.001</max_vel>
+                                <min_depth>0</min_depth>
                                 <kp>1e15</kp>
                                 <kd>1e13</kd>
                             </ode>
@@ -79,8 +80,10 @@
                         </friction>
                         <bounce/>
                     </surface>
+
                     <max_contacts>10</max_contacts>
                 </collision>
+
                 <self_collide>0</self_collide>
                 <enable_wind>0</enable_wind>
                 <kinematic>0</kinematic>
@@ -125,7 +128,7 @@
             <iterations>14042</iterations>
 
             <model name='FRC_Field_2024'>
-                <pose>0 0 0 0 -0 0</pose>
+                <pose>0 0 -0.005000 0 -0 0</pose>
                 <scale>1 1 1</scale>
                 <link name='field'>
                     <pose>0 0 0 0 -0 0</pose>

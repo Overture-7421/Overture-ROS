@@ -157,7 +157,7 @@
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
-            <pose>0.297594 0.014721 0.542723 0 -0 0</pose>
+            <pose>0.247991 0 0.453700 0 -0 0</pose>
             <gravity>1</gravity>
             <self_collide>0</self_collide>
             <kinematic>0</kinematic>
@@ -223,7 +223,7 @@
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
-            <pose>0.424624 0.279804 0.558335 1.5708 -0 0</pose>
+            <pose>0.317256 0.254208 0.579382 1.5708 -0 0</pose>
             <gravity>1</gravity>
             <self_collide>0</self_collide>
             <kinematic>0</kinematic>
@@ -288,7 +288,7 @@
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
-            <pose>0.424624 -0.279282 0.558334 1.57081 -0 0</pose>
+            <pose>0.317256 -0.254208 0.579382 1.5708 -0 0</pose>
             <gravity>1</gravity>
             <self_collide>0</self_collide>
             <kinematic>0</kinematic>
@@ -352,7 +352,7 @@
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
-            <pose>0.005963 8.9e-05 0.58995 0 -0 0</pose>
+            <pose>0.003170 0 0.624161 0 -0 0</pose>
             <gravity>1</gravity>
             <self_collide>0</self_collide>
             <kinematic>0</kinematic>
@@ -416,7 +416,7 @@
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
-            <pose>0.005963 8.9e-05 0.495594 0 -0 0</pose>
+            <pose>0.003170 0 0.527450 0 -0 0</pose>
             <gravity>1</gravity>
             <self_collide>0</self_collide>
             <kinematic>0</kinematic>
@@ -597,21 +597,24 @@
         </link>
 
         <link name='test_camera'>
-            <pose>0.5 0 0.5 0 0 0</pose>
+            <pose>-0.25 0 0.35 0 -0.4 3.141516</pose>
             <visual name='visual'>
                 <geometry>
                     <box>
-                        <size>0.1 0.1 0.1</size>
+                        <size>0.05 0.05 0.05</size>
                     </box>
                 </geometry>
             </visual>
             <sensor name='my_camera' type='camera'>
                 <camera>
-                    <horizontal_fov>1.047</horizontal_fov>
+                    <horizontal_fov>1.22173</horizontal_fov>
                     <image>
-                        <width>1920</width>
-                        <height>1080</height>
+                        <width>1280</width>
+                        <height>800</height>
                     </image>
+                    <lens>
+                        <scale_to_fov>true</scale_to_fov>
+                    </lens>
                 </camera>
                 <always_on>1</always_on>
                 <update_rate>120</update_rate>
@@ -624,12 +627,6 @@
                     <cameraInfoTopicName>camera_info</cameraInfoTopicName>
                     <frameName>test_camera</frameName>
                     <robotNamespace>FirstCAD7421</robotNamespace>
-                    <hackBaseline>0.07</hackBaseline>
-                    <distortionK1>0.0</distortionK1>
-                    <distortionK2>0.0</distortionK2>
-                    <distortionK3>0.0</distortionK3>
-                    <distortionT1>0.0</distortionT1>
-                    <distortionT2>0.0</distortionT2>
                 </plugin>
             </sensor>
         </link>
