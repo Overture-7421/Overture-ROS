@@ -51,3 +51,4 @@ qtcreator-*
 CATKIN_IGNORE
 *.blend1
 **/*.sdf
+**/*.world
