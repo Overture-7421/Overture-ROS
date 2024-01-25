@@ -223,7 +223,7 @@
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
-            <pose>0.317256 0.254208 0.579382 1.5708 -0 0</pose>
+            <pose>0.317256 0.254208 0.569124 1.5708 -0 0</pose>
             <gravity>1</gravity>
             <self_collide>0</self_collide>
             <kinematic>0</kinematic>
@@ -288,7 +288,7 @@
                 </inertia>
                 <pose>0 0 0 0 -0 0</pose>
             </inertial>
-            <pose>0.317256 -0.254208 0.579382 1.5708 -0 0</pose>
+            <pose>0.317256 -0.254208 0.569124 1.5708 -0 0</pose>
             <gravity>1</gravity>
             <self_collide>0</self_collide>
             <kinematic>0</kinematic>
@@ -648,6 +648,7 @@
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
                     <damping>0.75</damping>
+                    <friction>0.02</friction>
                 </dynamics>
             </axis>
             <physics>
@@ -680,6 +681,7 @@
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
                     <damping>0.1</damping>
+                    <friction>0.02</friction>
                 </dynamics>
             </axis>
             <physics>
@@ -778,8 +780,8 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.001</damping>
-                    <friction>0.005</friction>
+                    <damping>0.02</damping>
+                    <friction>0.01</friction>
                 </dynamics>
             </axis>
             <physics>
@@ -811,8 +813,8 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.001</damping>
-                    <friction>0.005</friction>
+                    <damping>0.02</damping>
+                    <friction>0.01</friction>
                 </dynamics>
             </axis>
             <physics>
