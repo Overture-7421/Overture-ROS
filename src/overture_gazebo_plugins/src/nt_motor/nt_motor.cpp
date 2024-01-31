@@ -9,6 +9,8 @@
 #include <cmath>
 #include <overture_filters/low_pass_filter/low_pass_filter.h>
 #include <ntcore/networktables/NetworkTableInstance.h>
+#include <networktables/DoubleTopic.h>
+#include <networktables/BooleanTopic.h>
 
 #define  SIM_UPDATE_PERIOD 0.001
 
@@ -108,7 +110,7 @@ namespace gazebo {
             updateConnection = event::Events::ConnectWorldUpdateBegin([this](auto && PH1) { Update(std::forward<decltype(PH1)>(PH1)); });
 
             ntInst = nt::NetworkTableInstance::GetDefault();
-            ntInst.SetServer("127.0.0.1");
+            ntInst.SetServer("localhost");
             std::stringstream  ntIdentity;
             ntIdentity << "nt_motor_plugin_" << modelName << "_" << jointName;
             ntInst.StartClient4(ntIdentity.str());
@@ -124,18 +126,17 @@ namespace gazebo {
 
             const auto ntable = ntInst.GetTable(result)->GetSubTable("motors")->GetSubTable(jointName);
 
-            encoderSpeedEntry = ntable->GetEntry("encoder_speed");
-            encoderPositionEntry = ntable->GetEntry("encoder_position");
-            voltageEntry = ntable->GetEntry("voltage_applied");
-            currentEntry = ntable->GetEntry("current");
-            torqueAppliedEntry = ntable->GetEntry("torque");
-            invertedEntry = ntable->GetEntry("inverted");
+            encoderSpeedEntry = ntable->GetDoubleTopic("encoder_speed").Publish();
+            encoderPositionEntry = ntable->GetDoubleTopic("encoder_position").Publish();
+            voltageEntry = ntable->GetDoubleTopic("voltage_applied").Subscribe(0.0);
+            currentEntry = ntable->GetDoubleTopic("current").Publish();
+            torqueAppliedEntry = ntable->GetDoubleTopic("torque").Publish();
+            invertedEntry = ntable->GetBooleanTopic("inverted").Subscribe(false);
 
-            encoderSpeedEntry.SetDouble(0);
-            encoderPositionEntry.SetDouble(0);
-            voltageEntry.SetDouble(0);
-            currentEntry.SetDouble(0);
-            torqueAppliedEntry.SetDouble(0);
+            encoderSpeedEntry.Set(0);
+            encoderPositionEntry.Set(0);
+            currentEntry.Set(0);
+            torqueAppliedEntry.Set(0);
         }
 
         void Init() override{
@@ -151,7 +152,7 @@ namespace gazebo {
             lastUpdateSimTime = currentSimTime;
 
             double jointTurns = (controlledJoint->Position(jointAxis) - initialPos) / (2.0 * M_PI);
-            auto appliedVoltage = units::volt_t (voltageEntry.GetDouble(0));
+            auto appliedVoltage = units::volt_t (voltageEntry.Get());
 
             double jointTurnsPerS = lowPassFilter.Update((jointTurns - lastPos) / SIM_UPDATE_PERIOD);
             lastPos = jointTurns;
@@ -193,13 +194,13 @@ namespace gazebo {
             }
 
             double rotations = jointTurns * gear_ratio;
-            encoderPositionEntry.SetDouble(rotations);
+            encoderPositionEntry.Set(rotations);
 
             double encoderSpeed = jointTurnsPerS * gear_ratio;
-            encoderSpeedEntry.SetDouble(encoderSpeed);
+            encoderSpeedEntry.Set(encoderSpeed);
 
-            torqueAppliedEntry.SetDouble(torqueToApply);
-            currentEntry.SetDouble(current.value());
+            torqueAppliedEntry.Set(torqueToApply);
+            currentEntry.Set(current.value());
 
             ntInst.Flush();
         }
@@ -212,7 +213,10 @@ namespace gazebo {
         physics::ModelPtr model;
         event::ConnectionPtr updateConnection;
         nt::NetworkTableInstance ntInst;
-        nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry, voltageEntry, currentEntry, torqueAppliedEntry, invertedEntry;
+
+        nt::DoublePublisher encoderSpeedEntry, encoderPositionEntry, currentEntry, torqueAppliedEntry;
+        nt::DoubleSubscriber voltageEntry;
+        nt::BooleanSubscriber invertedEntry;
 
         LowPassFilter lowPassFilter {25, SIM_UPDATE_PERIOD};
         common::Time lastUpdateSimTime;

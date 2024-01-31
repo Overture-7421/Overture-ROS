@@ -341,12 +341,12 @@
 
         <link name='shooter_roller_up'>
             <inertial>
-                <mass>0.680389</mass>
+                <mass>0.2</mass>
                 <inertia>
-                    <ixx>0.00631</ixx>
+                    <ixx>0.03211556</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.03211556</iyy>
+                    <iyy>0.000631</iyy>
                     <iyz>0</iyz>
                     <izz>0.01211556</izz>
                 </inertia>
@@ -405,12 +405,12 @@
 
         <link name='shooter_roller_down'>
             <inertial>
-                <mass>0.680389</mass>
+                <mass>0.2</mass>
                 <inertia>
-                    <ixx>0.00631</ixx>
+                    <ixx>0.03211556</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.03211556</iyy>
+                    <iyy>0.000631</iyy>
                     <iyz>0</iyz>
                     <izz>0.01211556</izz>
                 </inertia>
@@ -780,8 +780,8 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.02</damping>
-                    <friction>0.01</friction>
+                    <damping>0.001</damping>
+                    <friction>0.0</friction>
                 </dynamics>
             </axis>
             <physics>
@@ -813,8 +813,8 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.02</damping>
-                    <friction>0.01</friction>
+                    <damping>0.001</damping>
+                    <friction>0.0</friction>
                 </dynamics>
             </axis>
             <physics>
@@ -936,7 +936,7 @@
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
-            <gear_ratio>1</gear_ratio>
+            <gear_ratio>3</gear_ratio>
         </plugin>
 
         <plugin name='NTMotor_FirstCAD7421_Shooter_Up' filename='libnt_motor_plugin.so'>
@@ -944,7 +944,7 @@
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
-            <gear_ratio>0.416666667</gear_ratio>
+            <gear_ratio>3</gear_ratio>
         </plugin>
 
         <plugin name='NTMotor_FirstCAD7421_Shooter_Down' filename='libnt_motor_plugin.so'>
@@ -952,7 +952,7 @@
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
-            <gear_ratio>0.416666667</gear_ratio>
+            <gear_ratio>3</gear_ratio>
             <mechanically_inverted>true</mechanically_inverted>
         </plugin>
 
@@ -961,7 +961,7 @@
             <joint_axis>0</joint_axis>
             <torque_axis>y</torque_axis>
             <motor_model>FalconFOC</motor_model>
-            <gear_ratio>1</gear_ratio>
+            <gear_ratio>3</gear_ratio>
             <mechanically_inverted>true</mechanically_inverted>
         </plugin>
 

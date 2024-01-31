@@ -5,7 +5,7 @@
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
 #include <networktables/NetworkTableInstance.h>
-#include <networktables/NetworkTableEntry.h>
+#include <networktables/DoubleTopic.h>
 #include <overture_filters/low_pass_filter/low_pass_filter.h>
 
 #define  SIM_UPDATE_PERIOD 0.001
@@ -35,7 +35,7 @@ namespace gazebo {
             updateConnection = event::Events::ConnectWorldUpdateEnd([this] { Update(); });
 
             ntInst = nt::NetworkTableInstance::GetDefault();
-            ntInst.SetServer("127.0.0.1");
+            ntInst.SetServer("localhost");
             std::stringstream  ntIdentity;
             ntIdentity << "nt_cancoder_plugin_" << model->GetName() << "_" << jointName;
             ntInst.StartClient4(ntIdentity.str());
@@ -50,11 +50,11 @@ namespace gazebo {
             }
 
             const auto ntable = ntInst.GetTable(result)->GetSubTable("cancoders")->GetSubTable(jointName);
-            encoderSpeedEntry = ntable->GetEntry("cancoder_speed");
-            encoderPositionEntry = ntable->GetEntry("cancoder_position");
+            encoderSpeedEntry = ntable->GetDoubleTopic("cancoder_speed").Publish();
+            encoderPositionEntry = ntable->GetDoubleTopic("cancoder_position").Publish();
 
-            encoderSpeedEntry.SetDouble(0);
-            encoderPositionEntry.SetDouble(0);
+            encoderSpeedEntry.Set(0);
+            encoderPositionEntry.Set(0);
         }
 
         void Update() {
@@ -74,13 +74,13 @@ namespace gazebo {
             }
 
 
-            encoderPositionEntry.SetDouble(sensorPosition);
+            encoderPositionEntry.Set(sensorPosition);
 
 
             double encoderSpeed = speedLPF.Update((sensorPosition - lastPos) / SIM_UPDATE_PERIOD);
             lastPos = sensorPosition;
 
-            encoderSpeedEntry.SetDouble(encoderSpeed);
+            encoderSpeedEntry.Set(encoderSpeed);
         }
 
     private:
@@ -88,7 +88,7 @@ namespace gazebo {
         event::ConnectionPtr updateConnection;
         physics::JointPtr sourceJoint;
         nt::NetworkTableInstance ntInst;
-        nt::NetworkTableEntry encoderSpeedEntry, encoderPositionEntry;
+        nt::DoublePublisher encoderSpeedEntry, encoderPositionEntry;
 
         common::Time lastUpdateSimTime;
         LowPassFilter speedLPF {25,  SIM_UPDATE_PERIOD};

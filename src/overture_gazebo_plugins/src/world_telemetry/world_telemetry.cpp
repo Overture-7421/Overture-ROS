@@ -3,6 +3,7 @@
 //
 #include <frc/system/plant/DCMotor.h>
 #include <ntcore/networktables/NetworkTableInstance.h>
+#include <ntcore/networktables/DoubleTopic.h>
 #include <ros/ros.h>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
@@ -24,13 +25,13 @@ namespace gazebo {
             ntInst.StartClient4(ntIdentity.str());
 
             const auto ntable = ntInst.GetTable("nt_simworld");
-            simTimeEntry = ntable->GetEntry("sim_time");
+            simTimeEntry = ntable->GetDoubleTopic("sim_time").Publish();
 
             updateConnection = event::Events::ConnectWorldUpdateEnd([this] { Update(); });
         }
 
         void Update() {
-            simTimeEntry.SetDouble(world->SimTime().Double());
+            simTimeEntry.Set(world->SimTime().Double());
             ntInst.Flush();
         }
 
@@ -38,7 +39,7 @@ namespace gazebo {
         physics::WorldPtr world;
         event::ConnectionPtr updateConnection;
         nt::NetworkTableInstance ntInst;
-        nt::NetworkTableEntry simTimeEntry;
+        nt::DoublePublisher simTimeEntry;
     };
 
 

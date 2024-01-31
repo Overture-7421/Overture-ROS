@@ -6,7 +6,8 @@
 #include <gazebo/sensors/ImuSensor.hh>
 #include <gazebo/common/common.hh>
 #include <networktables/NetworkTableInstance.h>
-#include <networktables/NetworkTableEntry.h>
+#include <networktables/DoubleTopic.h>
+
 
 #define RADS_TO_DEGREES (180.0 / M_PI)
 
@@ -26,7 +27,7 @@ namespace gazebo {
             updateConnection = imuSensor->ConnectUpdated([this] { Update(); });
 
             ntInst = nt::NetworkTableInstance::GetDefault();
-            ntInst.SetServer("127.0.0.1");
+            ntInst.SetServer("localhost");
             std::stringstream  ntIdentity;
             ntIdentity << "nt_imu_plugin_" << imuSensor->Name();
             ntInst.StartClient4(ntIdentity.str());
@@ -38,16 +39,16 @@ namespace gazebo {
             imuScopedName = imuScopedName.substr(worldNameLength);
 
             const auto ntable = ntInst.GetTable(imuScopedName);
-            rollEntry = ntable->GetEntry("roll");
-            pitchEntry = ntable->GetEntry("pitch");
-            yawEntry = ntable->GetEntry("yaw");
+            rollPub = ntable->GetDoubleTopic("roll").Publish();
+            pitchPub = ntable->GetDoubleTopic("pitch").Publish();
+            yawPub = ntable->GetDoubleTopic("yaw").Publish();
         }
 
         void Update() {
             const auto orientation = imuSensor->Orientation();
-            rollEntry.SetDouble(orientation.Roll() * RADS_TO_DEGREES);
-            pitchEntry.SetDouble(orientation.Pitch() * RADS_TO_DEGREES);
-            yawEntry.SetDouble(orientation.Yaw() * RADS_TO_DEGREES);
+            rollPub.Set(orientation.Roll() * RADS_TO_DEGREES);
+            pitchPub.Set(orientation.Pitch() * RADS_TO_DEGREES);
+            yawPub.Set(orientation.Yaw() * RADS_TO_DEGREES);
 
             ntInst.Flush();
         }
@@ -57,7 +58,7 @@ namespace gazebo {
         event::ConnectionPtr updateConnection;
 
         nt::NetworkTableInstance ntInst;
-        nt::NetworkTableEntry rollEntry, pitchEntry, yawEntry;
+        nt::DoublePublisher rollPub, pitchPub, yawPub;
     };
 
 
