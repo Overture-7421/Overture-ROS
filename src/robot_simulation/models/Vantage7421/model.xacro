@@ -1,0 +1,884 @@
+<?xml version='1.0'?>
+<sdf version='1.7' xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find robot_simulation)/models/SDS_Module/SDS_Module.xacro"/>
+
+    <xacro:macro name="ShooterRoller" params="suffix:='' x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0">
+        <link name='shooter_roller_${suffix}'>
+            <inertial>
+                <mass>0.639</mass>
+                <inertia>
+                    <ixx>0.00036867</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.018</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.01836805</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 1.5708</pose>
+            </inertial>
+            <pose>${x} ${y} ${z} ${roll} ${pitch} ${yaw}</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/ShooterRoller.dae</uri>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/ShooterRoller_Collision.dae</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+    </xacro:macro>
+    <xacro:macro name="StorageWheel" params="suffix:='' x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0">
+        <link name='storage_wheel_${suffix}'>
+            <inertial>
+                <mass>0.064</mass>
+                <inertia>
+                    <ixx>0.00002928</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.00002929</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.00005164</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 1.5708</pose>
+            </inertial>
+            <pose>${x} ${y} ${z} ${roll} ${pitch} ${yaw}</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/StorageWheel.dae</uri>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/StorageWheel_Collision.dae</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+    </xacro:macro>
+    <xacro:macro name="IntakeWheels" params="suffix:='' x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0 color:='green'">
+        <link name='intake_wheel_${suffix}'>
+            <inertial>
+                <mass>0.42</mass>
+                <inertia>
+                    <ixx>0.00007818</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.01357815</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.01357815</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 1.5708</pose>
+            </inertial>
+            <pose>${x} ${y} ${z} ${roll} ${pitch} ${yaw}</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <xacro:if value="${color == 'green'}">
+                            <uri>$(find robot_simulation)/models/Vantage7421/GreenIntakeWheels.dae</uri>
+                        </xacro:if>
+                        <xacro:if value="${color == 'purple'}">
+                            <uri>$(find robot_simulation)/models/Vantage7421/PurpleIntakeWheels.dae</uri>
+                        </xacro:if>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <xacro:if value="${color == 'green'}">
+                            <uri>$(find robot_simulation)/models/Vantage7421/GreenIntakeWheels_Collision.dae</uri>
+                        </xacro:if>
+                        <xacro:if value="${color == 'purple'}">
+                            <uri>$(find robot_simulation)/models/Vantage7421/PurpleIntakeWheels_Collision.dae</uri>
+                        </xacro:if>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+    </xacro:macro>
+
+
+    <model name="Vantage7421">
+       <pose>0 0 0.040368 0 0 0</pose>
+        <static>0</static>
+        <allow_auto_disable>1</allow_auto_disable>
+        <link name='chassis'>
+            <inertial>
+                <mass>18.106</mass>
+                <inertia>
+                    <ixx>1.40304951</ixx>
+                    <ixy>0.15183618</ixy>
+                    <ixz>0.04110757</ixz>
+                    <iyy>0.83738791</iyy>
+                    <iyz>-0.10094326</iyz>
+                    <izz>1.70342451</izz>
+                </inertia>
+                <pose>0 0 0 0 0 1.5708</pose>
+            </inertial>
+            <pose>0 0 0 0 0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/Chassis.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/Chassis_Collision.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+            <sensor name="imu_sensor" type="imu">
+                <always_on>true</always_on>
+                <update_rate>100</update_rate>
+                <visualize>true</visualize>
+                <plugin filename="libnt_imu_plugin.so" name="imu_plugin"/>
+            </sensor>
+        </link>
+        <link name='arm'>
+            <inertial>
+                <mass>6.106</mass>
+                <inertia>
+                    <ixx>0.13911547</ixx>
+                    <ixy>0.00308518</ixy>
+                    <ixz>-0.00196379</ixz>
+                    <iyy>0.09656425</iyy>
+                    <iyz>0.04975118</iyz>
+                    <izz>0.17956327</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 1.5708</pose>
+            </inertial>
+            <pose>-0.260675 0 0.449637 0 0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/Arm.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/Arm_Collision.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+        <link name='shooter'>
+            <inertial>
+                <mass>8.785</mass>
+                <inertia>
+                    <ixx>0.12732879</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.29079919</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.35165681</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 1.5708</pose>
+            </inertial>
+            <pose>0.247565 0 0.449356 0 0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/Shooter.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/Shooter_Collision.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+        <link name='supports'>
+            <inertial>
+                <mass>1.76</mass>
+                <inertia>
+                    <ixx>0.08962456</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.14735337</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.23499241</izz>
+                </inertia>
+                <pose>0 0 0 0 -0 1.5708</pose>
+            </inertial>
+            <pose>-0.271892 0 0.343991 0 -0 0</pose>
+            <gravity>1</gravity>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <enable_wind>0</enable_wind>
+            <visual name='visual'>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/SupportArms.dae</uri>
+                    </mesh>
+                </geometry>
+                <transparency>0</transparency>
+                <cast_shadows>1</cast_shadows>
+            </visual>
+            <collision name='collision'>
+                <laser_retro>0</laser_retro>
+                <max_contacts>10</max_contacts>
+                <pose>0 0 0 0 -0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>$(find robot_simulation)/models/Vantage7421/SupportArms_Collision.dae</uri>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                            <mu2>1</mu2>
+                            <fdir1>0 0 0</fdir1>
+                            <slip1>0</slip1>
+                            <slip2>0</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <collide_without_contact>0</collide_without_contact>
+                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+                        <collide_bitmask>1</collide_bitmask>
+                        <ode>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <kp>1e+13</kp>
+                            <kd>1</kd>
+                            <max_vel>0.01</max_vel>
+                            <min_depth>0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+        </link>
+        <xacro:ShooterRoller suffix="up" x="0.002463" y="-0.006387" z="0.619108" roll="0" pitch="0" yaw="0"/>
+        <xacro:ShooterRoller suffix="down" x="0.002463" y="-0.006387" z="0.522223" roll="0" pitch="0" yaw="0"/>
+        <xacro:StorageWheel suffix="left" x="0.322521" y="-0.248159" z="0.562249" roll="0" pitch="0" yaw="0"/>
+        <xacro:StorageWheel suffix="right" x="0.322521" y="0.248159" z="0.562249" roll="0" pitch="0" yaw="0"/>
+        <xacro:IntakeWheels suffix="main" x="0.384386" y="0" z="0.221253" roll="0" pitch="0" yaw="0" color="purple"/>
+        <xacro:IntakeWheels suffix="1" x="0.322242" y="0" z="0.152469" roll="0" pitch="0" yaw="0"/>
+        <xacro:IntakeWheels suffix="2" x="0.419933" y="0" z="0.122301" roll="0" pitch="0" yaw="0"/>
+
+        <joint name='chassis_arm_joint' type='revolute'>
+            <parent>chassis</parent>
+            <child>arm</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.01</damping>
+                    <friction>0.001</friction>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0.0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+        <joint name='arm_shooter_joint' type='revolute'>
+            <parent>arm</parent>
+            <child>shooter</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.01</damping>
+                    <friction>0.02</friction>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0.0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+        <joint name='chassis_supports_joint' type='revolute'>
+            <parent>chassis</parent>
+            <child>supports</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.01</damping>
+                    <friction>0.1</friction>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+        <joint name='shooter_roller_up_joint' type='revolute'>
+            <parent>shooter</parent>
+            <child>shooter_roller_up</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.001</damping>
+                    <friction>0.0</friction>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+        <joint name='shooter_roller_down_joint' type='revolute'>
+            <parent>shooter</parent>
+            <child>shooter_roller_down</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.001</damping>
+                    <friction>0.0</friction>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+        <joint name='shooter_storage_wheel_left_joint' type='revolute'>
+            <parent>shooter</parent>
+            <child>storage_wheel_left</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.01</damping>
+                    <friction>0.02</friction>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0.0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+        <joint name='shooter_storage_wheel_right_joint' type='revolute'>
+            <parent>shooter</parent>
+            <child>storage_wheel_right</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.01</damping>
+                    <friction>0.02</friction>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0.0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+
+        <joint name='chassis_intake_wheels_joint' type='revolute'>
+            <parent>chassis</parent>
+            <child>intake_wheel_main</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.02</damping>
+                    <friction>0.05</friction>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+        <joint name='chassis_intake_wheels_1_joint' type='revolute'>
+            <parent>chassis</parent>
+            <child>intake_wheel_1</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.02</damping>
+                    <friction>0.05</friction>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+        <joint name='chassis_intake_wheels_2_joint' type='revolute'>
+            <parent>chassis</parent>
+            <child>intake_wheel_2</child>
+            <pose>0 0 0 0 -0 0</pose>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-1.79769e+308</lower>
+                    <upper>1.79769e+308</upper>
+                    <effort>-1</effort>
+                    <velocity>-1</velocity>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                    <damping>0.02</damping>
+                    <friction>0.05</friction>
+                </dynamics>
+            </axis>
+            <physics>
+                <ode>
+                    <limit>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </limit>
+                    <suspension>
+                        <cfm>0</cfm>
+                        <erp>0.2</erp>
+                    </suspension>
+                </ode>
+            </physics>
+        </joint>
+
+        <plugin name='NTMotor_Vantage7421_Arm_Right' filename='libnt_motor_plugin.so'>
+            <joint_name>chassis_arm_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>230</gear_ratio>
+            <suffix>right</suffix>
+        </plugin>
+        <plugin name='NTMotor_Vantage7421_Arm_Left' filename='libnt_motor_plugin.so'>
+            <joint_name>chassis_arm_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>230</gear_ratio>
+            <suffix>left</suffix>
+            <mechanically_inverted>true</mechanically_inverted>
+        </plugin>
+        <plugin name='NTMotor_Vantage7421_Shooter_Arm' filename='libnt_motor_plugin.so'>
+            <joint_name>arm_shooter_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>90</gear_ratio>
+        </plugin>
+        <plugin name='NTMotor_Vantage7421_Supports' filename='libnt_motor_plugin.so'>
+            <joint_name>chassis_supports_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>106</gear_ratio>
+        </plugin>
+        <plugin name='NTMotor_Vantage7421_Arm_Encoder' filename='libnt_cancoder_plugin.so'>
+            <joint_name>chassis_arm_joint</joint_name>
+            <inverted>true</inverted>
+        </plugin>
+        <plugin name='NTMotor_Vantage7421_Arm_Shooter_Encoder' filename='libnt_cancoder_plugin.so'>
+            <joint_name>arm_shooter_joint</joint_name>
+            <inverted>true</inverted>
+        </plugin>
+        <plugin name='NTMotor_Vantage7421_Support_Encoder' filename='libnt_cancoder_plugin.so'>
+            <joint_name>chassis_supports_joint</joint_name>
+            <inverted>true</inverted>
+        </plugin>
+
+        <plugin name='LinkedJoint_Vantage7421_Storage_Wheels' filename='liblinked_joint_plugin.so'>
+            <motor_name>shooter_storage_wheel_left_joint</motor_name>
+            <joint_target_name>shooter_storage_wheel_right_joint</joint_target_name>
+            <inverted>true</inverted>
+            <torque_axis>y</torque_axis>
+        </plugin>
+        <plugin name='LinkedJoint_Vantage7421_IntakeWheels_1' filename='liblinked_joint_plugin.so'>
+            <motor_name>chassis_intake_wheels_joint</motor_name>
+            <joint_target_name>chassis_intake_wheels_1_joint</joint_target_name>
+            <inverted>true</inverted>
+            <torque_axis>y</torque_axis>
+        </plugin>
+        <plugin name='LinkedJoint_Vantage7421_IntakeWheels_2' filename='liblinked_joint_plugin.so'>
+            <motor_name>chassis_intake_wheels_joint</motor_name>
+            <joint_target_name>chassis_intake_wheels_2_joint</joint_target_name>
+            <inverted>false</inverted>
+            <torque_axis>y</torque_axis>
+        </plugin>
+        <plugin name='LinkedJoint_Vantage7421_Storage_Wheels' filename='liblinked_joint_plugin.so'>
+            <motor_name>shooter_storage_wheel_left_joint</motor_name>
+            <joint_target_name>shooter_storage_wheel_right_joint</joint_target_name>
+            <inverted>true</inverted>
+            <torque_axis>y</torque_axis>
+        </plugin>
+
+        <xacro:SDL_Module suffix="FL" x="0.264044"    y="0.264044"    z="0.045079" parent_link="chassis" roll="0" pitch="0" yaw="0"/>
+        <xacro:SDL_Module suffix="FR" x="0.264044"    y="-0.264044"   z="0.045079" parent_link="chassis" roll="0" pitch="0" yaw="-1.5708"      rotation_offset="${1.5708}"/>
+        <xacro:SDL_Module suffix="BL" x="-0.264044"   y="0.264044"    z="0.045079" parent_link="chassis" roll="0" pitch="0" yaw="1.5708"       rotation_offset="${-1.5708}"/>
+        <xacro:SDL_Module suffix="BR" x="-0.264044"   y="-0.264044"   z="0.045079" parent_link="chassis" roll="0" pitch="0" yaw="-3.141516"    rotation_offset="${3.1416}"/>
+       </model>
+</sdf>

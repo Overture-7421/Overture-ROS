@@ -97,7 +97,7 @@
             <ode>
                 <solver>
                     <type>quick</type>
-                    <iters>100</iters>
+                    <iters>50</iters>
                 </solver>
                 <constraints>
                     <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
