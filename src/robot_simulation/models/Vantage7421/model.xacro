@@ -601,7 +601,7 @@
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
                     <damping>0.01</damping>
-                    <friction>0.02</friction>
+                    <friction>0.001</friction>
                 </dynamics>
             </axis>
             <physics>
@@ -632,8 +632,8 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>0.01</damping>
-                    <friction>0.1</friction>
+                    <damping>1.5</damping>
+                    <friction>0.001</friction>
                 </dynamics>
             </axis>
             <physics>
@@ -718,7 +718,7 @@
             <child>storage_wheel_left</child>
             <pose>0 0 0 0 -0 0</pose>
             <axis>
-                <xyz>0 1 0</xyz>
+                <xyz>0 0 1</xyz>
                 <limit>
                     <lower>-1.79769e+308</lower>
                     <upper>1.79769e+308</upper>
@@ -750,7 +750,7 @@
             <child>storage_wheel_right</child>
             <pose>0 0 0 0 -0 0</pose>
             <axis>
-                <xyz>0 1 0</xyz>
+                <xyz>0 0 1</xyz>
                 <limit>
                     <lower>-1.79769e+308</lower>
                     <upper>1.79769e+308</upper>
@@ -930,7 +930,7 @@
             <motor_name>shooter_storage_wheel_left_joint</motor_name>
             <joint_target_name>shooter_storage_wheel_right_joint</joint_target_name>
             <inverted>true</inverted>
-            <torque_axis>y</torque_axis>
+            <torque_axis>z</torque_axis>
         </plugin>
         <plugin name='LinkedJoint_Vantage7421_IntakeWheels_1' filename='liblinked_joint_plugin.so'>
             <motor_name>chassis_intake_wheels_joint</motor_name>
@@ -948,7 +948,7 @@
             <motor_name>shooter_storage_wheel_left_joint</motor_name>
             <joint_target_name>shooter_storage_wheel_right_joint</joint_target_name>
             <inverted>true</inverted>
-            <torque_axis>y</torque_axis>
+            <torque_axis>z</torque_axis>
         </plugin>
 
         <xacro:SDL_Module suffix="FL" x="0.264044"    y="0.264044"    z="0.045079" parent_link="chassis" roll="0" pitch="0" yaw="0"/>

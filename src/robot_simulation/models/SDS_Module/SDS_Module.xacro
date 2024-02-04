@@ -228,7 +228,6 @@
                     </friction>
                     <contact>
                         <ode>
-                            <min_depth>0.001</min_depth>
                             <kp>1e15</kp>
                             <kd>1</kd>
                         </ode>
@@ -251,8 +250,8 @@
                 <dynamics>
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
-                    <damping>1.3</damping>
-                    <friction>0.25</friction>
+                    <damping>1.5</damping>
+                    <friction>0.5</friction>
                 </dynamics>
             </axis>
             <physics>
@@ -277,8 +276,8 @@
                     <velocity>-1</velocity>
                 </limit>
                 <dynamics>
-                    <damping>0.01</damping>
-                    <friction>0.25</friction>
+                    <damping>0.001</damping>
+                    <friction>0.1</friction>
                 </dynamics>
             </axis>
         </joint>

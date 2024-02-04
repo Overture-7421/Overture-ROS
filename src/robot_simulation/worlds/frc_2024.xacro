@@ -97,12 +97,8 @@
             <ode>
                 <solver>
                     <type>quick</type>
-                    <iters>50</iters>
+                    <iters>100</iters>
                 </solver>
-                <constraints>
-                    <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
-                    <contact_surface_layer>0.001</contact_surface_layer>
-                </constraints>
             </ode>
         </physics>
         <scene>
