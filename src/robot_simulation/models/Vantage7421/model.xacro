@@ -913,15 +913,45 @@
             <motor_model>FalconFOC</motor_model>
             <gear_ratio>106</gear_ratio>
         </plugin>
+        <plugin name='NTMotor_Vantage7421_Shooter_Up' filename='libnt_motor_plugin.so'>
+            <joint_name>shooter_roller_up_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>3</gear_ratio>
+        </plugin>
+        <plugin name='NTMotor_Vantage7421_Shooter_Down' filename='libnt_motor_plugin.so'>
+            <joint_name>shooter_roller_down_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>3</gear_ratio>
+            <mechanically_inverted>true</mechanically_inverted>
+        </plugin>
+        <plugin name='NTMotor_Vantage7421_Intake' filename='libnt_motor_plugin.so'>
+            <joint_name>chassis_intake_wheels_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>y</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>3</gear_ratio>
+        </plugin>
+        <plugin name='NTMotor_Vantage7421_Storage' filename='libnt_motor_plugin.so'>
+            <joint_name>shooter_storage_wheel_left_joint</joint_name>
+            <joint_axis>0</joint_axis>
+            <torque_axis>z</torque_axis>
+            <motor_model>FalconFOC</motor_model>
+            <gear_ratio>3</gear_ratio>
+        </plugin>
+
         <plugin name='NTMotor_Vantage7421_Arm_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>chassis_arm_joint</joint_name>
             <inverted>true</inverted>
         </plugin>
-        <plugin name='NTMotor_Vantage7421_Arm_Shooter_Encoder' filename='libnt_cancoder_plugin.so'>
+        <plugin name='NTCANCoder_Vantage7421_Arm_Shooter_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>arm_shooter_joint</joint_name>
             <inverted>true</inverted>
         </plugin>
-        <plugin name='NTMotor_Vantage7421_Support_Encoder' filename='libnt_cancoder_plugin.so'>
+        <plugin name='NTCANCoder_Vantage7421_Support_Encoder' filename='libnt_cancoder_plugin.so'>
             <joint_name>chassis_supports_joint</joint_name>
             <inverted>true</inverted>
         </plugin>
@@ -943,12 +973,6 @@
             <joint_target_name>chassis_intake_wheels_2_joint</joint_target_name>
             <inverted>false</inverted>
             <torque_axis>y</torque_axis>
-        </plugin>
-        <plugin name='LinkedJoint_Vantage7421_Storage_Wheels' filename='liblinked_joint_plugin.so'>
-            <motor_name>shooter_storage_wheel_left_joint</motor_name>
-            <joint_target_name>shooter_storage_wheel_right_joint</joint_target_name>
-            <inverted>true</inverted>
-            <torque_axis>z</torque_axis>
         </plugin>
 
         <xacro:SDL_Module suffix="FL" x="0.264044"    y="0.264044"    z="0.045079" parent_link="chassis" roll="0" pitch="0" yaw="0"/>
