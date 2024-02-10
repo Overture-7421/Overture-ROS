@@ -20,20 +20,25 @@
                 <laser_retro>0</laser_retro>
                 <max_contacts>10</max_contacts>
                 <surface>
-
                     <contact>
-                        <collide_without_contact>0</collide_without_contact>
-                        <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
-                        <collide_bitmask>1</collide_bitmask>
+                        <collide_bitmask>65535</collide_bitmask>
                         <ode>
-                            <soft_cfm>0</soft_cfm>
-                            <soft_erp>0.2</soft_erp>
-                            <kp>100000</kp>
-                            <kd>1</kd>
                             <max_vel>0.001</max_vel>
-                            <min_depth>0</min_depth>
+                            <min_depth>0.001</min_depth>
+                            <kp>1e15</kp>
+                            <kd>1e13</kd>
                         </ode>
                     </contact>
+                    <friction>
+                        <ode>
+                            <mu>100</mu>
+                            <mu2>100</mu2>
+                        </ode>
+                        <torsional>
+                            <ode/>
+                        </torsional>
+                    </friction>
+                    <bounce/>
                 </surface>
 
             </collision>
